@@ -18,7 +18,9 @@ public class BroadListener implements Runnable {
 			ds.close();
 		}
 	}
-	
+	public void doIT(String info){
+		System.out.println("收到广播：" + info);
+	}
 	public void run() {
 		byte[] buf = new byte[1024];// 存储发来的消息
 		StringBuffer sbuf = new StringBuffer();
@@ -34,7 +36,7 @@ public class BroadListener implements Runnable {
 					}
 					sbuf.append((char) buf[i]);
 				}
-				System.out.println("收到广播消息：" + sbuf.toString());
+				doIT(sbuf.toString());
 				buf = new byte[1024];
 				dp = new DatagramPacket(buf, buf.length);
 				sbuf = new StringBuffer();

@@ -26,18 +26,10 @@ public class UniCast {
             PrintWriter pw=new PrintWriter(os);
             //输入流
             InputStream is=socket.getInputStream();
-//            BufferedReader br=new BufferedReader(new InputStreamReader(is));
-            //3.利用流按照一定的操作，对socket进行读写操作
             pw.write(message);
+            System.out.println("send "+message);
             pw.flush();
             socket.shutdownOutput();
-            //接收服务器的相应
-//            String reply=null;
-//            while(!((reply=br.readLine())==null)){
-//                System.out.println("接收服务器的信息："+reply);
-//            }
-            //4.关闭资源
-//            br.close();
             is.close();
             pw.close();
             os.close();

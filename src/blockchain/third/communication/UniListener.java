@@ -16,7 +16,9 @@ public class UniListener implements Runnable {
 	public UniListener(int p) {
 		this.port = p;
 	}
-
+	public void doIT(String info){
+		System.out.println("收到消息：" + info);
+	}
 	public void run() {
 		try {
 			ServerSocket serverSocket = new ServerSocket(port);// 2.使用accept()方法阻止等待监听，获得新连接
@@ -31,7 +33,7 @@ public class UniListener implements Runnable {
 //				PrintWriter pw = new PrintWriter(os); // 4.读取用户输入信息
 				String info = null;
 				while (!((info = br.readLine()) == null)) {
-					System.out.println("收到消息：" + info);
+					doIT(info);
 				}
 			}
 
