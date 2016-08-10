@@ -1,1 +1,16 @@
-/bin/
+# Maven #
+target/
+# Maven test folder #
+src/test/java
+
+# IDEA #
+.idea/
+*.iml
+
+# Eclipse #
+.settings/
+.metadate/
+.classpath
+.project
+Servers/
+
