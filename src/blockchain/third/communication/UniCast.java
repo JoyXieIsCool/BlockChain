@@ -9,10 +9,12 @@ import java.net.UnknownHostException;
 public class UniCast {
 	private String IP; //IP地址
 	private int port;   //端口号
-	UniCast(String ip,int p){
+	
+	public UniCast(String ip,int p){
 		this.IP=ip; //设置IP
 		this.port=p; //设置端口
 	}
+	
     public void Send(String message) {
         try {
             Socket socket =new Socket(IP,port);//新建socket
