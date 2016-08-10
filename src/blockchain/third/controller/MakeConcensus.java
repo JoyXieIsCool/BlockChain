@@ -1,9 +1,13 @@
 package blockchain.third.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import blockchain.third.bean.Message;
-import blockchain.third.bean.TempTable;
 
 public class MakeConcensus {
+	
+	List<Message> msg_list = new ArrayList<Message>();
 
 	public void insertMeassage(Message m) {
 
@@ -25,7 +29,7 @@ public class MakeConcensus {
 
 			// insert a new record;
 
-			if (m_tmp.num >= 10) {
+			if (msg_list.size() >= 10) {
 				if (roler == 0) {// is a speaker;
 					broadcast();
 
@@ -57,7 +61,7 @@ public class MakeConcensus {
 
 			// insert a new record;
 
-			if (m_tmp.num >= 10) {
+			if (msg_list.size() >= 10) {
 				if (roler == 0) {// is a speaker;
 					broadcast();
 
@@ -86,8 +90,6 @@ public class MakeConcensus {
 		broadcast();
 		
 	}
-	
-	TempTable m_tmp;
 
 	int roler;
 

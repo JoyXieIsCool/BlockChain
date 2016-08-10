@@ -1,24 +1,24 @@
 package blockchain.third.bean;
 
 public class BlockQueue {
-	public static int Max_Len = 30;
+	public static int Max_Len = 50;
+	Block queue[] = new Block[Max_Len];
 	
-	BlockQueue() {
+	public BlockQueue() {
 		first = 0;
 		last = 0;
 	}
 	
 	public void insert(Block m) {
-		if (last > Max_Len) {	
-			////
-			//exit(0);
-			return;
-		}
-		queue[last++] = m;
+		queue[last ++] = m;
+		last %= Max_Len;
 	}
 
 	public Block pop() {
-		return null;
+		Block tmp = queue[first ++];
+		first %= Max_Len;
+		
+		return tmp;
 	}
 	
 	public void clear() {
@@ -28,5 +28,4 @@ public class BlockQueue {
 
 	int first;
 	int last;
-	Block queue[] = new Block[Max_Len];
 }
