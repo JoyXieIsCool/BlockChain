@@ -1,8 +1,11 @@
 package blockchain.third.controller;
 
+import blockchain.third.bean.Message;
+import blockchain.third.bean.TempTable;
+
 public class MakeConcensus {
 
-	public void insertMeassage(Meassage m) {
+	public void insertMeassage(Message m) {
 
 		broadcast();
 
