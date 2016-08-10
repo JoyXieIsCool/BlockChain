@@ -2,7 +2,7 @@ package blockchain.third.communication;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
+//发送口
 public class Cast {
 
 	public static void main(String[] args) throws UnknownHostException {
@@ -12,7 +12,6 @@ public class Cast {
 		RecordCast.Send(myIP+":P2P_RecordCast");
 //		UniCast BlockCast = new UniCast(IP, 3001);
 //		BlockCast.Send(myIP+":my block");
-//
 //		BroadCast IPCast = new BroadCast(4000);
 //		IPCast.Send(myIP+":my IP");
 //		BroadCast RecordCast2 = new BroadCast(4001);

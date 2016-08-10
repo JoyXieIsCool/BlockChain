@@ -11,19 +11,19 @@ public class BroadCast{
 	private int port;
 	private DatagramSocket ds;
 	public BroadCast(int p){
-		this.port=p;//ÉèÖÃ¹ã²¥¶Ë¿Ú
+		this.port=p;//è®¾ç½®ç«¯å£
 	}
 		
 	public void Send(String message){ 
-		// ¹ã²¥µÄÊµÏÖ :ÓÉ¿Í»§¶Ë·¢³ö¹ã²¥£¬·şÎñÆ÷¶Ë½ÓÊÕ
-		String host = "255.255.255.255";//¹ã²¥µØÖ·
+		//è®¾ç½®å¹¿æ’­IP
+		String host = "255.255.255.255";//å¹¿æ’­IP
 		try {
 			InetAddress adds = InetAddress.getByName(host);
 			ds = new DatagramSocket();
 			DatagramPacket dp = new DatagramPacket(message.getBytes(),
 					message.length(), adds, port);
 			ds.send(dp);
-			System.out.println("send "+message);
+			System.out.println("send "+message); //å‘é€ä¿¡æ¯ç»“æŸ
 			ds.close();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
