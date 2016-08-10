@@ -10,7 +10,7 @@ src/test/java
 # Eclipse #
 .settings/
 .metadate/
-
+.classpath
 .project
 Servers/
 
