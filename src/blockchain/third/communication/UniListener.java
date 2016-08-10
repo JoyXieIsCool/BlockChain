@@ -11,36 +11,30 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class UniListener implements Runnable {
-	private int port;
+	private int port; //ç«¯å£å·
 
 	public UniListener(int p) {
-		this.port = p;
+		this.port = p; //è®¾ç½®ç«¯å£å·
 	}
-
+	public void doIT(String info){
+		//ç”¨æ¥é‡å†™çš„æ–¹æ³•
+		System.out.println("Get UniCast" + info);
+	}
 	public void run() {
 		try {
-			ServerSocket serverSocket = new ServerSocket(port);// 2.Ê¹ÓÃaccept()·½·¨×èÖ¹µÈ´ı¼àÌı£¬»ñµÃĞÂÁ¬½Ó
-			String IP=InetAddress.getLocalHost().toString();
-			System.out.println(IP+"¼àÌıµ¥²¥¶Ë¿Ú" + port + "´ò¿ª£º");
+			ServerSocket serverSocket = new ServerSocket(port);  //æ–°å»ºSocket
+			String IP=InetAddress.getLocalHost().toString(); //è·å¾—æœ¬æœºIP
+			System.out.println(IP+" PC " + port + "is listening"); //è¾“å‡ºçŠ¶æ€
 			while (true) {
-				Socket socket = serverSocket.accept(); // 3.»ñµÃÊäÈëÁ÷
+				Socket socket = serverSocket.accept(); 
 				InputStream is = socket.getInputStream();
 				BufferedReader br = new BufferedReader(
-						new InputStreamReader(is)); // »ñµÃÊä³öÁ÷
-//				OutputStream os = socket.getOutputStream();
-//				PrintWriter pw = new PrintWriter(os); // 4.¶ÁÈ¡ÓÃ»§ÊäÈëĞÅÏ¢
+						new InputStreamReader(is)); 
 				String info = null;
 				while (!((info = br.readLine()) == null)) {
-					System.out.println("ÊÕµ½ÏûÏ¢£º" + info);
+					doIT(info);   //è¿›è¡Œæ“ä½œ
 				}
 			}
-
-			// pw.close();
-			// os.close();
-			// br.close();
-			// is.close();
-			// socket.close();
-			// serverSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -7,37 +7,22 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class UniCast {
-	
-	private String IP;
-	private int port;
-	
+	private String IP; //IPåœ°å€
+	private int port;   //ç«¯å£å·
 	UniCast(String ip,int p){
-		this.IP=ip;
-		this.port=p;
+		this.IP=ip; //è®¾ç½®IP
+		this.port=p; //è®¾ç½®ç«¯å£
 	}
-	
-	
     public void Send(String message) {
         try {
-            //1.½¨Á¢¿Í»§¶ËsocketÁ¬½Ó£¬Ö¸¶¨·şÎñÆ÷Î»ÖÃ¼°¶Ë¿Ú
-            Socket socket =new Socket(IP,port);
-            //2.µÃµ½socket¶ÁĞ´Á÷
+            Socket socket =new Socket(IP,port);//æ–°å»ºsocket
             OutputStream os=socket.getOutputStream();
             PrintWriter pw=new PrintWriter(os);
-            //ÊäÈëÁ÷
             InputStream is=socket.getInputStream();
-//            BufferedReader br=new BufferedReader(new InputStreamReader(is));
-            //3.ÀûÓÃÁ÷°´ÕÕÒ»¶¨µÄ²Ù×÷£¬¶Ôsocket½øĞĞ¶ÁĞ´²Ù×÷
             pw.write(message);
+            System.out.println("send "+message);	//å‘é€ä¿¡æ¯ç»“æŸ
             pw.flush();
             socket.shutdownOutput();
-            //½ÓÊÕ·şÎñÆ÷µÄÏàÓ¦
-//            String reply=null;
-//            while(!((reply=br.readLine())==null)){
-//                System.out.println("½ÓÊÕ·şÎñÆ÷µÄĞÅÏ¢£º"+reply);
-//            }
-            //4.¹Ø±Õ×ÊÔ´
-//            br.close();
             is.close();
             pw.close();
             os.close();

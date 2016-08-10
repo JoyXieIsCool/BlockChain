@@ -6,11 +6,12 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 
 public class BroadListener implements Runnable {
-	private int port; // ¶Ë¿Ú
+	private int port; // ç«¯å£å·
 	private DatagramSocket ds;
 	private DatagramPacket dp;
+
 	public BroadListener(int p) {
-		this.port = p;// ÉèÖÃ¹ã²¥¶Ë¿Ú
+		this.port = p;// è®¾ç½®ç«¯å£å·
 	}
 
 	public void closeListener() {
@@ -18,14 +19,19 @@ public class BroadListener implements Runnable {
 			ds.close();
 		}
 	}
-	
+
+	public void doIT(String info) {
+		//ç”¨æ¥é‡å†™çš„æ–¹æ³•
+		System.out.println("DoSomething" + info);
+	}
+
 	public void run() {
-		byte[] buf = new byte[1024];// ´æ´¢·¢À´µÄÏûÏ¢
+		byte[] buf = new byte[1024];// æš‚å­˜
 		StringBuffer sbuf = new StringBuffer();
 		try {
 			ds = new DatagramSocket(port);
 			dp = new DatagramPacket(buf, buf.length);
-			System.out.println("¼àÌı¹ã²¥¶Ë¿Ú" + port + "´ò¿ª£º");
+			System.out.println("My port:" + port + " opened");
 			while (!ds.isClosed()) {
 				ds.receive(dp);
 				for (int i = 0; i < 1024; i++) {
@@ -34,7 +40,7 @@ public class BroadListener implements Runnable {
 					}
 					sbuf.append((char) buf[i]);
 				}
-				System.out.println("ÊÕµ½¹ã²¥ÏûÏ¢£º" + sbuf.toString());
+				doIT(sbuf.toString());   //è¿›è¡Œæ“ä½œ
 				buf = new byte[1024];
 				dp = new DatagramPacket(buf, buf.length);
 				sbuf = new StringBuffer();
@@ -43,7 +49,7 @@ public class BroadListener implements Runnable {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			ds.close();
 		}
 	}
