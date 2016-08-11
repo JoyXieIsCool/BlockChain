@@ -34,6 +34,7 @@ public class GlobalVariable {
 	public static int requestBlockPort;
 	public static int sendResponsePort;
 	public static int sendBlockPort;
+	public static int receveSpeakerIDPort;
 	
 	static {
 		properties = PropertyUtil.loadProps("system.properties");

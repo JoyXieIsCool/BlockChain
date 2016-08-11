@@ -19,7 +19,7 @@ public class MakeConcensus {
 	public static ArrayList<Block> block_arr = new ArrayList<Block>();
 	// List<Message> tmp_table = new ArrayList<Message>();
 	
-	public void insertMeassage(Message m) {
+	public static void insertMeassage(Message m) {
 		if (m.operation_code == Constants.RESB || m.operation_code == Constants.RESR) {
 			if (msg_map.get(m.timestamp) != null) {
 				m_tmpBlock.addRecord(m.toString());
@@ -62,6 +62,13 @@ public class MakeConcensus {
 			BroadCast sendBlock = new BroadCast(GlobalVariable.sendBlockPort);
 			sendBlock.Send(m_tmpBlock.toString());
 			break;
+			
+		case SENDSPEAKERID:
+			// dispatch block;
+			BroadCast sendSpeakerID = new BroadCast(GlobalVariable.receveSpeakerIDPort);
+			///////////////
+			sendSpeakerID.Send(MakeConcensus.nextSpeaker);
+			break;
 
 		default:
 			;
@@ -76,7 +83,7 @@ public class MakeConcensus {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Listener responseListnener = new Listener(GlobalVariable.sendResponsePort);
+				Listener responseListnener = new Listener(GlobalVariable.requestResponsePort);
 				Thread t = new Thread(responseListnener);
 				t.start();
 			}
@@ -88,7 +95,7 @@ public class MakeConcensus {
 		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Listener responseListnener = new Listener(GlobalVariable.sendBlockPort);
+				Listener responseListnener = new Listener(GlobalVariable.requestBlockPort);
 				Thread t = new Thread(responseListnener);
 				t.start();
 			}
@@ -119,23 +126,35 @@ public class MakeConcensus {
 
 		});
 		t4.start();
+		
+		// 监听block响应
+		Thread t5 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Listener responseListnener = new Listener(GlobalVariable.receveSpeakerIDPort);
+				Thread t = new Thread(responseListnener);
+				t.start();
+			}
+
+		});
+		t5.start();
 	}
 
 	public static void choseNextSpeaker() {
 		int num_node = GlobalVariable.ipList.size();
 		int speakerIndex = (int)(Math.random()*1000%num_node), index = 0;
-		String nextSpeaker = "";
+		MakeConcensus.nextSpeaker = "";
 		for (String key : GlobalVariable.ipList.keySet()) {
 			if (index == speakerIndex) {
 				if (key == GlobalVariable.ID)
 					speakerIndex = (++ speakerIndex) % num_node;
 				else
-					nextSpeaker = key;
+					MakeConcensus.nextSpeaker = key;
 			}
 			index = (++ index) % num_node;
 		}
 		GlobalVariable.isSpeaker = false;
-		System.out.println(nextSpeaker);
+		System.out.println(MakeConcensus.nextSpeaker);
 		
 		//broadcast result
 		
@@ -146,5 +165,6 @@ public class MakeConcensus {
 	int state;
 	static Block finalBlock;
 	Message m_tmpMessage;
+	public static String nextSpeaker = "";
 
 }
