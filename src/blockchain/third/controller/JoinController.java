@@ -117,8 +117,11 @@ public class JoinController {
 				String ip = tmp[1];
 				String localIp = getLocalIP();
 				// 如果不是自己的IP则添加到IP列表中去
-				if (!localIp.equals(ip))
+				if (!localIp.equals(ip)) {
 					GlobalVariable.ipList.put(id, ip);
+					System.out.println("Current IP List Size: " + GlobalVariable.ipList.size());
+					System.out.println(GlobalVariable.ipList.toString());
+				}
 			}
 		}
 		
