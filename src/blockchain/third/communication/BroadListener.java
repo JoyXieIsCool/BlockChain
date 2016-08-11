@@ -6,7 +6,7 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 
 public class BroadListener implements Runnable {
-	private int port; // 端口号
+	public int port; // 端口号
 	private DatagramSocket ds;
 	private DatagramPacket dp;
 

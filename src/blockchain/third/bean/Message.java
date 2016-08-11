@@ -20,6 +20,14 @@ public class Message implements Serializable{
         this.timestamp = timestamp;
     }
     
+    public Message() {
+        this.operation_code = Constants.RESBLOCK;
+        this.sender = this.receiver = "";
+        this.timestamp = "";
+
+    }
+    
+    
     public Message(String record) {
         String[] temp_data = record.trim().split(seperator);
         if (temp_data.length == Constants.MESSAGE_LENGTH) {
