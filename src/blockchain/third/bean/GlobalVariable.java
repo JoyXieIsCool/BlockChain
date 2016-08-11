@@ -36,6 +36,9 @@ public class GlobalVariable {
 	public static int sendBlockPort;
 	public static int receveSpeakerIDPort;
 	
+	public static int blockMaxRecord;
+	public static int maxIpTable;
+	
 	static {
 		properties = PropertyUtil.loadProps("system.properties");
 		
@@ -52,6 +55,8 @@ public class GlobalVariable {
 		sendResponsePort = PropertyUtil.getInt(properties, "sendResponsePort");
 		sendBlockPort = PropertyUtil.getInt(properties, "sendBlockPort");
 				
+		blockMaxRecord = PropertyUtil.getInt(properties, "blockMaxRecord");
+		maxIpTable = PropertyUtil.getInt(properties, "maxIpTable");
 	}
 	
 	public static void main(String[] args) throws IOException {

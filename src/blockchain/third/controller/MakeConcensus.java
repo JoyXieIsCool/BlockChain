@@ -38,8 +38,10 @@ public class MakeConcensus {
 		switch (type) {
 
 		case REQUESTRESPONSE:
+			
 			BroadCast requstResponse = new BroadCast(GlobalVariable.requestResponsePort);
 			requstResponse.Send(str);
+			System.out.println(GlobalVariable.ID + "_" + "request a response" + "_" + "message: " + str);
 			break;
 
 		case REQUSTBLOCK:
@@ -47,6 +49,7 @@ public class MakeConcensus {
 			BroadCast requstBlock = new BroadCast(GlobalVariable.requestBlockPort);
 			Message msg = new Message();
 			msg.operation_code = Constants.RESBLOCK;
+			System.out.println(GlobalVariable.ID + "_" + "request a block");
 			requstBlock.Send(msg.toString());
 			break;
 			
@@ -54,20 +57,23 @@ public class MakeConcensus {
 
 		case SENDRESPOSE:
 			BroadCast sendResponse = new BroadCast(GlobalVariable.sendResponsePort);
-			sendResponse.Send(":my IP");
+			sendResponse.Send(str);
+			System.out.println(GlobalVariable.ID + "_" + "send a response" + "_" + "message: " + str);
 			break;
 
 		case SENDBLOCK:
 			// dispatch block;
 			BroadCast sendBlock = new BroadCast(GlobalVariable.sendBlockPort);
+			System.out.println(GlobalVariable.ID + "_" + "send a block");
 			sendBlock.Send(m_tmpBlock.toString());
 			break;
-			
+		
 		case SENDSPEAKERID:
 			// dispatch block;
 			BroadCast sendSpeakerID = new BroadCast(GlobalVariable.receveSpeakerIDPort);
 			///////////////
 			sendSpeakerID.Send(MakeConcensus.nextSpeaker);
+			System.out.println(GlobalVariable.ID + "_" + "send next speaker" + "_" + MakeConcensus.nextSpeaker);
 			break;
 
 		default:

@@ -38,6 +38,7 @@ public class Listener extends BroadListener {
 				} else {
 					s_msg.value = 0;
 				}
+				System.out.println(GlobalVariable.ID + "_" + "get a  request");
 				MakeConcensus.broadcast(BROADCASTTYPY.SENDRESPOSE, msg.toString());
 			}
 		}
@@ -46,6 +47,7 @@ public class Listener extends BroadListener {
 		else if (port == GlobalVariable.requestBlockPort) {
 			MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK, MakeConcensus.m_tmpBlock.toString());
 			// send block;
+			System.out.println(GlobalVariable.ID + "_" + "get a  block request");
 		}
 
 		// 接受响应
@@ -56,10 +58,11 @@ public class Listener extends BroadListener {
 			// if record size over a num, then ........;
 			Message t_msg = null;
 			if ((t_msg = MakeConcensus.msg_map.get(msg.timestamp)) != null) {
+				System.out.println(GlobalVariable.ID + "_" + "get a  response");
 				MakeConcensus.m_tmpBlock.addRecord(MakeConcensus.msg_map.get(msg.timestamp).toString());
 				MakeConcensus.msg_map.remove(msg.timestamp);
 
-				if (MakeConcensus.m_tmpBlock.getBlockSize() >= 10) {
+				if (MakeConcensus.m_tmpBlock.getBlockSize() >= GlobalVariable.blockMaxRecord) {
 					if (GlobalVariable.isSpeaker) {
 						MakeConcensus.broadcast(BROADCASTTYPY.REQUSTBLOCK, "");		
 					}
@@ -81,8 +84,8 @@ public class Listener extends BroadListener {
 			Block block = new Block(info);
 			MakeConcensus.block_arr.add(block);
 			
-			
-			if (GlobalVariable.isSpeaker && MakeConcensus.block_arr.size() >= 5) {
+			System.out.println(GlobalVariable.ID + "_" + "get a  block");
+			if (GlobalVariable.isSpeaker && MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable) {
 				Map<String, Integer> blk_map = new HashMap<String, Integer>();
 				
 				for (Block b : MakeConcensus.block_arr) {
@@ -116,6 +119,7 @@ public class Listener extends BroadListener {
 		}
 		
 		else if (port == GlobalVariable.receveSpeakerIDPort) {
+			System.out.println(GlobalVariable.ID + "_" + "become a speaker");
 			if (info == GlobalVariable.ID) {
 				GlobalVariable.isSpeaker = true;
 			}	
