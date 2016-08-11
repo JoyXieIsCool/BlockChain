@@ -22,24 +22,13 @@ public class Listener extends BroadListener {
 		// 监听响应请求
 		if (port == GlobalVariable.requestResponsePort) {
 			Message msg = new Message(info);
+			
 			if (GlobalVariable.ID.equals(msg.receiver)) {
-				Message s_msg = new Message(info);
-
-				s_msg.operation_code = Constants.RESB;
-				s_msg.receiver = msg.sender;
-				s_msg.sender = msg.receiver;
-				s_msg.timestamp = msg.timestamp;
-				// // decide send what response in each time;
-				if (true) {
-					s_msg.value = 1;
-				} else {
-					s_msg.value = 0;
-				}
-				MakeConcensus.m_tmpBlock.addRecord(msg.toString());
-				MakeConcensus.m_tmpBlock.addRecord(s_msg.toString());
-				System.out.println(GlobalVariable.ID + "_" + "get a  request");
-				MakeConcensus.broadcast(BROADCASTTYPY.SENDRESPOSE,
-						s_msg.toString());
+				// 需要本人处理的则等待用户确认后再记录
+				GlobalVariable.alertMessage = info;
+			} else {
+				// 不需要本人处理的请求则添加相应的记录
+				MakeConcensus.msg_map.put(msg.timestamp, msg);
 			}
 		}
 

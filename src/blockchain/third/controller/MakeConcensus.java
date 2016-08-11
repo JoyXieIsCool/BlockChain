@@ -45,6 +45,30 @@ public class MakeConcensus {
 		
 	}
 	
+	/**
+	 * 响应与自己相关的请求，并把结果广播出去 
+	 */
+	public static void ackRequest(boolean isAck) {
+		Message s_msg = new Message(GlobalVariable.alertMessage);
+		Message msg = new Message(GlobalVariable.alertMessage);
+
+		s_msg.operation_code = Constants.RESB;
+		s_msg.receiver = msg.sender;
+		s_msg.sender = msg.receiver;
+		s_msg.timestamp = msg.timestamp;
+		// // decide send what response in each time;
+		if (isAck) {
+			s_msg.value = 1;
+		} else {
+			s_msg.value = 0;
+		}
+		MakeConcensus.m_tmpBlock.addRecord(msg.toString());
+		MakeConcensus.m_tmpBlock.addRecord(s_msg.toString());
+		System.out.println(GlobalVariable.ID + "_" + "get a  request");
+		broadcast(BROADCASTTYPY.SENDRESPOSE,
+				s_msg.toString());
+	}
+	
 	public static void broadcast(BROADCASTTYPY type, String str) {
 
 		switch (type) {

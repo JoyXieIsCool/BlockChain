@@ -16,6 +16,10 @@ public class GlobalVariable {
 	public static boolean isSpeaker;
 	// 是否是核心节点，负责对新加入的块转发数据和IP表
 	public static boolean isRoot;
+	// 标记是否需要应答
+	public static volatile boolean needResponse = false;
+	// 前端弹窗的信息，一般是命令，如1000_A_B_666_201608120230999
+	public static String alertMessage = "";
 	// 自己的ID
 	public static String ID;
 	// ID和IP映射表

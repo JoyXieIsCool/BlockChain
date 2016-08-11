@@ -3,6 +3,16 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	
+	<filter>
+        <filter-name>xssFilter</filter-name>
+        <filter-class>blockchain.third.filter.XssFilter</filter-class>
+    </filter>
+ 
+    <filter-mapping>
+        <filter-name>xssFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
 	<servlet>
         <servlet-name>submitBillServlet</servlet-name>
         <servlet-class>blockchain.third.controller.SubmitBillServlet</servlet-class>
@@ -18,6 +28,11 @@
         <servlet-class>blockchain.third.controller.QueryBlockServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>queryResponseServlet</servlet-name>
+        <servlet-class>blockchain.third.controller.QueryResponseServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
  
     <servlet-mapping>
         <servlet-name>submitBillServlet</servlet-name>
@@ -29,6 +44,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>queryBlockServlet</servlet-name>
+        <url-pattern>/queryBlock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>queryResponseServlet</servlet-name>
         <url-pattern>/queryBlock</url-pattern>
     </servlet-mapping>
 </web-app>
