@@ -93,5 +93,20 @@ public class DB {
             return null;
         }
     }
+    
+    public String getLastBlockHash() {
+    	try {
+			ResultSet result = statement.executeQuery("select hash from records order by record_id desc limit 1;");
+			if (result.next()) {
+				return result.getString(0);
+			}
+			else {
+				return "0";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "0";
+		}
+    }
 
 }
