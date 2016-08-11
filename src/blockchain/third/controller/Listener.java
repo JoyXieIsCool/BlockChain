@@ -66,7 +66,9 @@ public class Listener extends BroadListener {
 				System.out.println(GlobalVariable.ID + "_" + "get a  response");
 				MakeConcensus.m_tmpBlock.addRecord(MakeConcensus.msg_map.get(
 						msg.timestamp).toString());
+				MakeConcensus.m_tmpBlock.addRecord(msg.toString());
 				MakeConcensus.msg_map.remove(msg.timestamp);
+				System.out.println("now tmpBlock size is: " + MakeConcensus.m_tmpBlock.getBlockSize());
 
 				if (MakeConcensus.m_tmpBlock.getBlockSize() >= GlobalVariable.blockMaxRecord) {
 					if (GlobalVariable.isSpeaker) {
@@ -83,6 +85,7 @@ public class Listener extends BroadListener {
 
 		// 接受BLOCK
 		else if (port == GlobalVariable.sendBlockPort) {
+			System.out.println("--------vote here------");
 			Block block = new Block(info);
 			if (GlobalVariable.isSpeaker == false) {
 				// write final block
@@ -124,6 +127,7 @@ public class Listener extends BroadListener {
 				MakeConcensus.finalBlock = res_block;
 				MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
 						MakeConcensus.finalBlock.toString());
+				System.out.println("-----speaker write block------");
 				DB.getDBInstance().addBlock(MakeConcensus.finalBlock);
 
 			}
