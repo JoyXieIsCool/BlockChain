@@ -74,6 +74,10 @@ public class Listener extends BroadListener {
 
 		// 接受BLOCK
 		else if (port == GlobalVariable.sendBlockPort) {
+			if (GlobalVariable.isSpeaker == false) {
+				return;
+			}
+			
 			Block block = new Block(info);
 			MakeConcensus.block_arr.add(block);
 			
@@ -109,6 +113,12 @@ public class Listener extends BroadListener {
 				MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK, MakeConcensus.finalBlock.toString());
 				
 			}
+		}
+		
+		else if (port == GlobalVariable.receveSpeakerIDPort) {
+			if (info == GlobalVariable.ID) {
+				GlobalVariable.isSpeaker = true;
+			}	
 		}
 
 		// 用来重写的方法
