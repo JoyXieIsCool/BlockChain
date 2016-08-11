@@ -61,7 +61,7 @@ public class DB {
         }
     }
     
-    public List<Block> queryBlock() {
+    public List<Block> queryBlock(int last_len) {
         List<Block> blocks = new ArrayList<Block>();
         Block temp_block = null;
         try {
@@ -79,7 +79,14 @@ public class DB {
             if (temp_block != null) {
                 temp_block.generateHash();
                 blocks.add(temp_block);
-            }       
+            }    
+            if (blocks.size() <= last_len) {
+                return null;
+            }
+            for (int index = 0; index < last_len; index++)
+            {
+                blocks.remove(0);   // remove blocks that don't need.
+            }
             return blocks;
         } catch (SQLException e) {
             e.printStackTrace();
