@@ -140,7 +140,7 @@ public class Listener extends BroadListener {
 				MakeConcensus.choseNextSpeaker();
 				MakeConcensus.finalBlock = res_block;
 				MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
-						MakeConcensus.finalBlock.toString());
+						JsonUtil.transBlock2JsonStr(MakeConcensus.finalBlock));
 				System.out.println("-----speaker write block------");
 				DB.getDBInstance().addBlock(MakeConcensus.finalBlock);
 
