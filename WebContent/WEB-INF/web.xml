@@ -48,6 +48,6 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>queryResponseServlet</servlet-name>
-        <url-pattern>/queryBlock</url-pattern>
+        <url-pattern>/queryResponse</url-pattern>
     </servlet-mapping>
 </web-app>
