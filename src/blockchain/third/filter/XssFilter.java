@@ -11,6 +11,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 
+import blockchain.third.controller.JoinController;
+import blockchain.third.controller.MakeConcensus;
+
 public class XssFilter implements Filter{
 
 	@Override
@@ -31,7 +34,9 @@ public class XssFilter implements Filter{
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		
+		System.out.println("~~~Initialize filter~~~");
+		new JoinController();
+		MakeConcensus.listen();
 	}
 
 }
