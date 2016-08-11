@@ -13,8 +13,8 @@ import blockchain.third.utils.PropertyUtil;
 public class GlobalVariable {
 	private static Properties properties;
 	
-	// 当前是否是矿工
-	public static boolean isMiner;
+	// 当前是否是议长
+	public static boolean isSpeaker;
 	// 是否是核心节点，负责对新加入的块转发数据和IP表
 	public static boolean isRoot;
 	// 自己的ID
@@ -30,7 +30,7 @@ public class GlobalVariable {
 	static {
 		properties = PropertyUtil.loadProps("system.properties");
 		
-		isMiner = PropertyUtil.getBoolean(properties, "isMiner", false);
+		isSpeaker = PropertyUtil.getBoolean(properties, "isMiner", false);
 		isRoot = PropertyUtil.getBoolean(properties, "isRoot", false);
 		ID = PropertyUtil.getString(properties, "id");
 		joinListenPort = PropertyUtil.getInt(properties, "joinListenPort");
