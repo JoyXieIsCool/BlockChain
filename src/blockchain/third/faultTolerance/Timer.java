@@ -1,15 +1,31 @@
 package blockchain.third.faultTolerance;
 
 public class Timer implements Runnable {
-	private double counts; //秒级倒计时
+	private double counts; // 秒级倒计时
+	private boolean isOK = false;
+	private double tmpTime;
 
 	public Timer(double counts) {
 		this.counts = counts;
+		this.tmpTime = counts;
+	}
+
+	public void DisasterRecovery() {
+		System.out.println("We Should do Something!");
+	}
+
+	public void setOK() {
+		this.isOK = true;
+		this.counts = this.tmpTime;
+	}
+
+	public void restart() {
+		this.counts = this.tmpTime;
 	}
 
 	@Override
 	public void run() {
-		while (counts>0) {
+		while (counts > 0 && !isOK) {
 			System.out.println("还剩： " + counts + " 秒");
 			counts--;
 			try {
@@ -18,6 +34,8 @@ public class Timer implements Runnable {
 				e.printStackTrace();
 			}
 		}
+		if (!isOK)
+			DisasterRecovery();
 	}
 
 }
