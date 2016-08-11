@@ -80,7 +80,7 @@ public class DB {
                 temp_block.generateHash();
                 blocks.add(temp_block);
             }    
-            if (blocks.size() <= last_len) {
+            if (last_len != 0 && blocks.size() <= last_len) {
                 return null;
             }
             for (int index = 0; index < last_len; index++)
