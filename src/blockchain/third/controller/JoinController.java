@@ -109,6 +109,7 @@ public class JoinController {
 
 		@Override
 		public void doIT(String info) {
+			System.out.println("RootNodeMsgListener Receive: " + info);
 			if (info.startsWith("[IP]")) {
 				// 处理根节点发来的IP列表
 				String[] tmp = info.substring(4).split("&");
@@ -175,8 +176,10 @@ public class JoinController {
 			
 			File dbFile = new File(GlobalVariable.dbPath);
 			// 如果DB文件不存在则不发
-			if (!dbFile.exists())
+			if (!dbFile.exists()) {
+				System.out.println("$$$ There is no DB file $$$");
 				return;
+			}
 			
 			// 发送数据库文件给新加入的节点
 			FileCast fc = new FileCast(GlobalVariable.receiveRootFilePort);

@@ -21,7 +21,7 @@ public class GlobalVariable {
 	// ID和IP映射表
 	public static Map<String, String> ipList = new ConcurrentHashMap<String, String>();
 	
-	// 监听加入网络的计算机的端口
+	// 监听加入网络的计算机的广播的端口
 	public static int joinListenPort;
 	// 普通节点加入网络时与根节点通信的端口，用于接收IP列表
 	public static int listenToRootPort;
