@@ -1,6 +1,8 @@
 package blockchain.third.bean;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable{
     
     public int operation_code = Constants.ERROR_VALUE;
     public String sender = null;
