@@ -13,6 +13,7 @@ import blockchain.third.bean.GlobalVariable;
 import blockchain.third.bean.Message;
 import blockchain.third.communication.BroadCast;
 import blockchain.third.communication.BroadListener;
+import blockchain.third.utils.JsonUtil;
 
 public class MakeConcensus {
 	
@@ -129,7 +130,9 @@ public class MakeConcensus {
 		GlobalVariable.isSpeaker = false;
 		System.out.println(MakeConcensus.nextSpeaker);
 		
-		//broadcast result
+		
+		MakeConcensus.broadcast(BROADCASTTYPY.SENDSPEAKERID, MakeConcensus.nextSpeaker);
+		
 		
 	}
 
