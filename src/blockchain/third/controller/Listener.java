@@ -40,7 +40,7 @@ System.out.println("*************" + info);
 					s_msg.value = 0;
 				}
 				System.out.println(GlobalVariable.ID + "_" + "get a  request");
-				MakeConcensus.broadcast(BROADCASTTYPY.SENDRESPOSE, msg.toString());
+				MakeConcensus.broadcast(BROADCASTTYPY.SENDRESPOSE, s_msg.toString());
 			}
 		}
 
@@ -57,8 +57,8 @@ System.out.println("*************" + info);
 
 			// add a new record;
 			// if record size over a num, then ........;
-			Message t_msg = null;
-			if ((t_msg = MakeConcensus.msg_map.get(msg.timestamp)) != null) {
+			Message t_msg =  MakeConcensus.msg_map.get(msg.timestamp);
+			if (t_msg != null) {
 				System.out.println(GlobalVariable.ID + "_" + "get a  response");
 				MakeConcensus.m_tmpBlock.addRecord(MakeConcensus.msg_map.get(msg.timestamp).toString());
 				MakeConcensus.msg_map.remove(msg.timestamp);
