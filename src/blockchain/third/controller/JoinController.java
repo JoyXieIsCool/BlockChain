@@ -1,5 +1,6 @@
 package blockchain.third.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Iterator;
@@ -172,8 +173,13 @@ public class JoinController {
 			}
 			uc.Send(buffer.toString());
 			
+			File dbFile = new File(GlobalVariable.dbPath);
+			// 如果DB文件不存在则不发
+			if (!dbFile.exists())
+				return;
+			
 			// 发送数据库文件给新加入的节点
-			FileCast fc = new FileCast(GlobalVariable.listenToRootPort);
+			FileCast fc = new FileCast(GlobalVariable.receiveRootFilePort);
 			try {
 				fc.Send(host, GlobalVariable.dbPath);
 			} catch (IOException e) {
