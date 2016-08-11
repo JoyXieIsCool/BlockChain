@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
+import blockchain.third.bean.BROADCASTTYPY;
 import blockchain.third.bean.Block;
 import blockchain.third.bean.Constants;
 import blockchain.third.bean.GlobalVariable;
 import blockchain.third.bean.Message;
+import blockchain.third.communication.BroadCast;
+import blockchain.third.communication.BroadListener;
 
 public class MakeConcensus {
 	
-	Map<String, Message> msg_map = new HashMap<String, Message>();
+	public static Map<String, Message> msg_map = new HashMap<String, Message>();
+	public static ArrayList<Block> block_arr = new ArrayList<Block>();
 	// List<Message> tmp_table = new ArrayList<Message>();
 	
 	public void insertMeassage(Message m) {
@@ -26,46 +30,98 @@ public class MakeConcensus {
 		else if (m.operation_code == Constants.REQB || m.operation_code == Constants.REQR)
 			msg_map.put(m.timestamp, m);
 		
-		broadcast(m);
+		broadcast(BROADCASTTYPY.REQUESTRESPONSE, m.toString());
 	}
 
-	public void broadcast(Message m) {
+	public static void broadcast(BROADCASTTYPY type, String str) {
 
-		switch (1) {
+		switch (type) {
 
-		case 1:
-			;
-
+		case REQUESTRESPONSE:
+			BroadCast requstResponse = new BroadCast(10001);
+			requstResponse.Send(str);
 			break;
 
-		case 2:
+		case REQUSTBLOCK:
 
-			// insert a new record;
+			BroadCast requstBlock = new BroadCast(10002);
+			Message msg = new Message();
+			msg.operation_code = Constants.RESBLOCK;
+			requstBlock.Send(msg.toString());
+			break;
+			
+			
 
+		case SENDRESPOSE:
+			BroadCast sendResponse = new BroadCast(10003);
+			sendResponse.Send(":my IP");
+			break;
+
+		case SENDBLOCK:
+			// dispatch block;
+			BroadCast sendBlock = new BroadCast(10004);
+			sendBlock.Send(m_tmpBlock.toString());
+			break;
+
+		default:
+			;
 			break;
 		}
+
 		;
 	}
 
 	public void listen() {
+		// ¼àÌý»ØÓ¦ÇëÇó
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Listener responseListnener = new Listener(10003);
+				Thread t = new Thread(responseListnener);
+				t.start();
+			}
 
-		switch (1) {
+		});
+		t1.start();
 
-		case 1:
-			;
+		// ¼àÌýblockÇëÇó
+		Thread t2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Listener responseListnener = new Listener(10004);
+				Thread t = new Thread(responseListnener);
+				t.start();
+			}
 
-			break;
+		});
+		t2.start();
 
-		case 2:
+		// ¼àÌý»ØÓ¦ÏìÓ¦
+		Thread t3 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Listener responseListnener = new Listener(10003);
+				Thread t = new Thread(responseListnener);
+				t.start();
+			}
 
-			// insert a new record;
+		});
+		t3.start();
 
-			break;
-		}
+		// ¼àÌýblockÏìÓ¦
+		Thread t4 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Listener responseListnener = new Listener(10004);
+				Thread t = new Thread(responseListnener);
+				t.start();
+			}
 
+		});
+		t4.start();
 	}
 
-	public void choseNextSpeaker() {
+	public static void choseNextSpeaker() {
 		int num_node = GlobalVariable.ipList.size();
 		int speakerIndex = (int)(Math.random()*1000%num_node), index = 0;
 		String nextSpeaker = "";
@@ -85,8 +141,10 @@ public class MakeConcensus {
 		
 	}
 
-	Block m_tmpBlock;
+	static Block m_tmpBlock;
 	int roler;
 	int state;
+	static Block finalBlock;
+	Message m_tmpMessage;
 
 }
