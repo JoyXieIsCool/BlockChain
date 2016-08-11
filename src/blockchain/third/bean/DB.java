@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.sqlite.JDBC;
 
+import blockchain.third.utils.JsonUtil;
+
 public class DB {
 
     private volatile static DB db_instance = null;
@@ -50,7 +52,9 @@ public class DB {
     
     public boolean addBlock(Block block) {
         try {
+        	System.out.println("DB53: " + JsonUtil.transBlock2JsonStr(block));
             for (String block_record : block.getBlockContent()) {
+            	System.out.println("DB57: " + block_record);
                 statement.executeUpdate("insert into records(pre_hash, body, hash) values('" + 
                         block.pre_hash + "', '" + block_record + "', '" + block.hash + "');");
             }
@@ -67,6 +71,7 @@ public class DB {
         try {
             ResultSet result = statement.executeQuery("select * from records group by hash order by record_id");
             while(result.next()) {
+            	System.out.println("DB70: " + result.toString());
                 if (temp_block == null || !temp_block.pre_hash.equals(result.getString("pre_hash"))) {
                     if (temp_block != null) {
                         temp_block.generateHash();
@@ -98,7 +103,7 @@ public class DB {
     	try {
 			ResultSet result = statement.executeQuery("select hash from records order by record_id desc limit 1;");
 			if (result.next()) {
-				return result.getString(0);
+				return result.getString(1);
 			}
 			else {
 				return "0";

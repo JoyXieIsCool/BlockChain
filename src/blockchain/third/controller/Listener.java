@@ -105,9 +105,12 @@ public class Listener extends BroadListener {
 			MakeConcensus.block_arr.add(block);
 
 			System.out.println(GlobalVariable.ID + "_" + "get a  block");
+			System.out.println("L108: " + MakeConcensus.block_arr.size());
 			if (GlobalVariable.isSpeaker
-					&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable) {
+					&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable-1) {
 				Map<String, Integer> blk_map = new HashMap<String, Integer>();
+				// put myself block
+				MakeConcensus.block_arr.add(MakeConcensus.m_tmpBlock);
 
 				for (Block b : MakeConcensus.block_arr) {
 					System.out.println(JsonUtil.transBlock2JsonStr(b));
@@ -141,6 +144,7 @@ public class Listener extends BroadListener {
 
 				MakeConcensus.choseNextSpeaker();
 				MakeConcensus.finalBlock = res_block;
+				System.out.println("L147 final_block: " + JsonUtil.transBlock2JsonStr(MakeConcensus.finalBlock));
 				MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
 						JsonUtil.transBlock2JsonStr(MakeConcensus.finalBlock));
 				System.out.println("-----speaker write block------");

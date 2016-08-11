@@ -14,6 +14,7 @@ public class JsonUtil {
     public static String transBlock2JsonStr(List<Block> blocks) {
         JSONArray blocks_array = new JSONArray();
         for (Block block : blocks) {
+        	System.out.println("JU17: " + transBlock2JsonStr(block));
             blocks_array.put(transBlock2Json(block));          
         }
         return blocks_array.toString();
