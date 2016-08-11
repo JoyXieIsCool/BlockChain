@@ -22,7 +22,7 @@ public class UniCast {
             PrintWriter pw=new PrintWriter(os);
             InputStream is=socket.getInputStream();
             pw.write(message);
-            System.out.println("send "+message);	//发送信息结束
+            System.out.println("[SentTo:" + IP + "] " + message); //发送信息结束
             pw.flush();
             socket.shutdownOutput();
             is.close();

@@ -1,12 +1,13 @@
 package blockchain.third.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import blockchain.third.utils.MD5;
 
 
-public class Block {
+public class Block implements Serializable {
 
     public String pre_hash = null;
     public String hash = null;
