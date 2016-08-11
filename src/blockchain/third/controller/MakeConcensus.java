@@ -67,7 +67,7 @@ public class MakeConcensus {
 			// dispatch block;
 			BroadCast sendBlock = new BroadCast(GlobalVariable.sendBlockPort);
 			System.out.println(GlobalVariable.ID + "_" + "send a block");
-			sendBlock.Send(m_tmpBlock.toString());
+			sendBlock.Send(str);
 			break;
 		
 		case SENDSPEAKERID:

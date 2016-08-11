@@ -92,6 +92,7 @@ public class Listener extends BroadListener {
 		// 接受BLOCK
 		else if (port == GlobalVariable.sendBlockPort) {
 			System.out.println("--------vote here------");
+			System.out.println("info is:" + info);
 			Block block = new Block(info, Constants.JSON_FORMAT);
 			if (GlobalVariable.isSpeaker == false) {
 				// write final block
