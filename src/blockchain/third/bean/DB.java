@@ -69,9 +69,9 @@ public class DB {
         List<Block> blocks = new ArrayList<Block>();
         Block temp_block = null;
         try {
-            ResultSet result = statement.executeQuery("select * from records group by hash order by record_id");
+            ResultSet result = statement.executeQuery("select * from records order by record_id");
             while(result.next()) {
-            	System.out.println("DB70: " + result.toString());
+            	System.out.println("DB74: " + result.getString("pre_hash") + result.getString("hash") + result.getString("body"));
                 if (temp_block == null || !temp_block.pre_hash.equals(result.getString("pre_hash"))) {
                     if (temp_block != null) {
                         temp_block.generateHash();
