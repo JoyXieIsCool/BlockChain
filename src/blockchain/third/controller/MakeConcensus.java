@@ -1,5 +1,7 @@
 package blockchain.third.controller;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -17,33 +19,35 @@ import blockchain.third.communication.UniCast;
 import blockchain.third.utils.JsonUtil;
 
 public class MakeConcensus {
-	
+
 	public static Map<String, Message> msg_map = new HashMap<String, Message>();
 	public static ArrayList<Block> block_arr = new ArrayList<Block>();
+
 	// List<Message> tmp_table = new ArrayList<Message>();
-	
+
 	public static void insertMeassage(Message m) {
-		if (m.operation_code == Constants.RESB || m.operation_code == Constants.RESR) {
+		if (m.operation_code == Constants.RESB
+				|| m.operation_code == Constants.RESR) {
 			if (msg_map.get(m.timestamp) != null) {
 				m_tmpBlock.addRecord(m.toString());
 				m_tmpBlock.addRecord(msg_map.get(m.timestamp).toString());
 				msg_map.remove(m.timestamp);
 			}
-		}
-		else if (m.operation_code == Constants.REQB || m.operation_code == Constants.REQR) {
+		} else if (m.operation_code == Constants.REQB
+				|| m.operation_code == Constants.REQR) {
 			msg_map.put(m.timestamp, m);
 		}
-		
+
 		broadcast(BROADCASTTYPY.REQUESTRESPONSE, m.toString());
 	}
-	
-	
-	public static void unicast(String ip, int port,String str){
-		UniCast uni = new UniCast(ip,port);
+
+	public static void unicast(String ip, int port, String str) {
+		UniCast uni = new UniCast(ip, port);
 		uni.Send(str);
 		System.out.println(GlobalVariable.ID + "_" + "send a block");
-		
+
 	}
+
 	
 	/**
 	 * 响应与自己相关的请求，并把结果广播出去 
@@ -67,34 +71,52 @@ public class MakeConcensus {
 		System.out.println(GlobalVariable.ID + "_" + "get a  request");
 		broadcast(BROADCASTTYPY.SENDRESPOSE,
 				s_msg.toString());
+		if (MakeConcensus.m_tmpBlock.getBlockSize() >= GlobalVariable.blockMaxRecord) {
+			MakeConcensus.m_tmpBlock.generateHash();
+			if (GlobalVariable.isSpeaker) {
+				MakeConcensus.broadcast(BROADCASTTYPY.REQUSTBLOCK, "");
+			} 
+
+		}
 	}
 	
 	public static void broadcast(BROADCASTTYPY type, String str) {
 
 		switch (type) {
-
 		case REQUESTRESPONSE:
-			
-			BroadCast requstResponse = new BroadCast(GlobalVariable.requestResponsePort);
+
+			BroadCast requstResponse = new BroadCast(
+					GlobalVariable.requestResponsePort);
 			requstResponse.Send(str);
-			System.out.println(GlobalVariable.ID + "_" + "request a response" + "_" + "message: " + str);
+			System.out.println(GlobalVariable.ID + "_" + "request a response"
+					+ "_" + "message: " + str);
 			break;
 
 		case REQUSTBLOCK:
 
-			BroadCast requstBlock = new BroadCast(GlobalVariable.requestBlockPort);
+			BroadCast requstBlock = new BroadCast(
+					GlobalVariable.requestBlockPort);
 			Message msg = new Message();
+			InetAddress addr;
+			try {
+				addr = InetAddress.getLocalHost();
+				msg.sender = addr.getHostAddress().toString();// 获得本机IP
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			msg.operation_code = Constants.RESBLOCK;
 			System.out.println(GlobalVariable.ID + "_" + "request a block");
 			requstBlock.Send(msg.toString());
 			break;
-			
-			
 
 		case SENDRESPOSE:
-			BroadCast sendResponse = new BroadCast(GlobalVariable.sendResponsePort);
+			BroadCast sendResponse = new BroadCast(
+					GlobalVariable.sendResponsePort);
 			sendResponse.Send(str);
-			System.out.println(GlobalVariable.ID + "_" + "send a response" + "_" + "message: " + str);
+			System.out.println(GlobalVariable.ID + "_" + "send a response"
+					+ "_" + "message: " + str);
 			break;
 
 		case SENDBLOCK:
@@ -102,21 +124,23 @@ public class MakeConcensus {
 			BroadCast sendBlock = new BroadCast(GlobalVariable.sendBlockPort);
 			System.out.println(GlobalVariable.ID + "_" + "send a block");
 			sendBlock.Send(str);
-			
-			
-			
-			
-			
-			break;
-		
-		case SENDSPEAKERID:
-			// dispatch block;
-			BroadCast sendSpeakerID = new BroadCast(GlobalVariable.receveSpeakerIDPort);
-			///////////////
-			sendSpeakerID.Send(MakeConcensus.nextSpeaker);
-			System.out.println(GlobalVariable.ID + "_" + "send next speaker" + "_" + MakeConcensus.nextSpeaker);
+
 			break;
 
+		case SENDSPEAKERID:
+			// dispatch block;
+			BroadCast sendSpeakerID = new BroadCast(
+					GlobalVariable.receveSpeakerIDPort);
+			// /////////////
+			sendSpeakerID.Send(MakeConcensus.nextSpeaker);
+			System.out.println(GlobalVariable.ID + "_" + "send next speaker"
+					+ "_" + MakeConcensus.nextSpeaker);
+			break;
+		case FINALBLOCK:
+			BroadCast sendFinalBlock = new BroadCast(GlobalVariable.sendFinalBlockPort);
+			System.out.println(GlobalVariable.ID + "_" + "send a final block");
+			sendFinalBlock.Send(str);
+			break;
 		default:
 			;
 			break;
@@ -127,56 +151,65 @@ public class MakeConcensus {
 
 	public static void listen() {
 		// 监听回应请求
-		Listener responseListnener = new Listener(GlobalVariable.requestResponsePort);
+		Listener responseListnener = new Listener(
+				GlobalVariable.requestResponsePort);
 		Thread t = new Thread(responseListnener);
 		t.start();
 
 		// 监听block请求
-		Listener blockResponseListnener = new Listener(GlobalVariable.requestBlockPort);
+		Listener blockResponseListnener = new Listener(
+				GlobalVariable.requestBlockPort);
 		Thread tblock = new Thread(blockResponseListnener);
 		tblock.start();
 
 		// 监听回应响应
-		Listener responseListnener3 = new Listener(GlobalVariable.sendResponsePort);
+		Listener responseListnener3 = new Listener(
+				GlobalVariable.sendResponsePort);
 		Thread t3 = new Thread(responseListnener3);
 		t3.start();
 
 		// 监听block响应
-		
-		//Listener responseListnener4 = new Listener(GlobalVariable.sendBlockPort);
-		//Narc
-		RequestListener responseListnener4 = new RequestListener(GlobalVariable.sendBlockPort);
+
+		Listener responseListnener6 = new Listener(
+				GlobalVariable.sendFinalBlockPort);
+		Thread t6 = new Thread(responseListnener6);
+		t6.start();
+		// Narc
+		RequestListener responseListnener4 = new RequestListener(
+				GlobalVariable.sendBlockPort);
 		Thread t4 = new Thread(responseListnener4);
 		t4.start();
-		
+
 		// 监听block响应
-		Listener responseListnener5 = new Listener(GlobalVariable.receveSpeakerIDPort);
+		Listener responseListnener5 = new Listener(
+				GlobalVariable.receveSpeakerIDPort);
 		Thread t5 = new Thread(responseListnener5);
 		t5.start();
 	}
 
 	public static void choseNextSpeaker() {
 		int num_node = GlobalVariable.ipList.size();
-		int speakerIndex = (int)(Math.random()*1000%num_node), index = 0;
+		int speakerIndex = (int) (Math.random() * 1000 % num_node), index = 0;
 		MakeConcensus.nextSpeaker = "";
 		for (String key : GlobalVariable.ipList.keySet()) {
 			if (index == speakerIndex) {
 				if (key == GlobalVariable.ID)
-					speakerIndex = (++ speakerIndex) % num_node;
+					speakerIndex = (++speakerIndex) % num_node;
 				else
 					MakeConcensus.nextSpeaker = key;
 			}
-			index = (++ index) % num_node;
+			index = (++index) % num_node;
 		}
 		GlobalVariable.isSpeaker = false;
 		System.out.println(MakeConcensus.nextSpeaker);
-		
-		MakeConcensus.broadcast(BROADCASTTYPY.SENDSPEAKERID, MakeConcensus.nextSpeaker);
-		
-		
+
+		MakeConcensus.broadcast(BROADCASTTYPY.SENDSPEAKERID,
+				MakeConcensus.nextSpeaker);
+
 	}
 
-	public static Block m_tmpBlock = new Block(DB.getDBInstance().getLastBlockHash());
+	public static Block m_tmpBlock = new Block(DB.getDBInstance()
+			.getLastBlockHash());
 	int roler;
 	int state;
 	static Block finalBlock;
