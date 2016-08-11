@@ -11,6 +11,7 @@ import blockchain.third.bean.GlobalVariable;
 import blockchain.third.bean.Message;
 import blockchain.third.communication.BroadCast;
 import blockchain.third.communication.BroadListener;
+import blockchain.third.utils.JsonUtil;
 
 public class Listener extends BroadListener {
 
@@ -49,9 +50,10 @@ public class Listener extends BroadListener {
 		// 监听BLOCK请求
 		else if (port == GlobalVariable.requestBlockPort) {
 			//这里改成单播！！！！！！！！！
+			//////////////////////////////////////////////////////////
 			MakeConcensus.m_tmpBlock.generateHash();
 			MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
-					MakeConcensus.m_tmpBlock.toString());
+					JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
 			// send block;
 			System.out
 					.println(GlobalVariable.ID + "_" + "get a  block request");
@@ -76,10 +78,11 @@ public class Listener extends BroadListener {
 					MakeConcensus.m_tmpBlock.generateHash();
 					if (GlobalVariable.isSpeaker) {
 						MakeConcensus.broadcast(BROADCASTTYPY.REQUSTBLOCK, "");
-					} else {
-						MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
-								MakeConcensus.m_tmpBlock.toString());
-					}
+					} 
+//						else {
+//						MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
+//								MakeConcensus.m_tmpBlock.toString());
+//					}
 
 				}
 			}
@@ -89,7 +92,7 @@ public class Listener extends BroadListener {
 		// 接受BLOCK
 		else if (port == GlobalVariable.sendBlockPort) {
 			System.out.println("--------vote here------");
-			Block block = new Block(info);
+			Block block = new Block(info, Constants.JSON_FORMAT);
 			if (GlobalVariable.isSpeaker == false) {
 				// write final block
 				DB.getDBInstance().addBlock(block);
@@ -104,6 +107,7 @@ public class Listener extends BroadListener {
 				Map<String, Integer> blk_map = new HashMap<String, Integer>();
 
 				for (Block b : MakeConcensus.block_arr) {
+					System.out.println(JsonUtil.transBlock2JsonStr(b));
 					if (blk_map.get(b.hash) == null || blk_map.get(b.hash) == 0)
 						blk_map.put(b.hash, 1);
 					else
@@ -112,7 +116,9 @@ public class Listener extends BroadListener {
 				}
 				int max = -100;
 				String max_hash = "";
+				System.out.println("blk_map: " + blk_map.toString());
 				for (String keyString : blk_map.keySet()) {
+					System.out.println("---blk_map keystring---: " + keyString);
 					if (blk_map.get(keyString).intValue() > max) {
 						max = blk_map.get(keyString);
 						max_hash = keyString;
@@ -120,6 +126,10 @@ public class Listener extends BroadListener {
 				}
 				Block res_block = null;
 				for (Block b : MakeConcensus.block_arr) {
+					if (max_hash == null)
+						System.out.println("max_hash is null");
+					if (b.hash == null)
+						System.out.println("b.hash is null");
 					if (max_hash.equals(b.hash)) {
 						res_block = b;
 						break;
