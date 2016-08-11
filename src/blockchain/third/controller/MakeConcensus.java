@@ -2,18 +2,21 @@ package blockchain.third.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import blockchain.third.bean.Constants;
 import blockchain.third.bean.Message;
 
 public class MakeConcensus {
 	
-	List<Message> msg_list = new ArrayList<Message>();
-
+	Map<String, Message> msg_map = new HashMap<String, Message>();
+	// List<Message> tmp_table = new ArrayList<Message>();
+	
 	public void insertMeassage(Message m) {
-
+		if (m.operation_code == Constants.REQB || m.operation_code == Constants.REQR)
+			msg_map.put(m.timestamp, m);
 		broadcast();
-
-		;
 	}
 
 	public void broadcast() {
@@ -29,7 +32,7 @@ public class MakeConcensus {
 
 			// insert a new record;
 
-			if (msg_list.size() >= 10) {
+			if (msg_map.size() >= 10) {
 				if (roler == 0) {// is a speaker;
 					broadcast();
 
@@ -61,7 +64,7 @@ public class MakeConcensus {
 
 			// insert a new record;
 
-			if (msg_list.size() >= 10) {
+			if (msg_map.size() >= 10) {
 				if (roler == 0) {// is a speaker;
 					broadcast();
 

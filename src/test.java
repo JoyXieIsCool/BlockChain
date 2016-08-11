@@ -1,5 +1,4 @@
 import blockchain.third.bean.Block;
-import blockchain.third.bean.BlockQueue;
 
 
 public class test {
