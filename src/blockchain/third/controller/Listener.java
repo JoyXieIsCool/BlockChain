@@ -25,7 +25,7 @@ public class Listener extends BroadListener {
 		// 监听响应请求
 		if (port == GlobalVariable.requestResponsePort) {
 			Message msg = new Message(info);
-			if (msg.receiver == GlobalVariable.ID) {
+			if (GlobalVariable.ID.equals(msg.receiver)) {
 				Message s_msg = new Message(info);
 
 				s_msg.operation_code = Constants.RESB;
@@ -105,7 +105,7 @@ public class Listener extends BroadListener {
 				}
 				Block res_block = null;
 				for (Block b : MakeConcensus.block_arr) {
-					if (b.hash == max_hash) {
+					if (max_hash.equals(b.hash)) {
 						res_block = b;
 						break;
 					}
@@ -120,7 +120,7 @@ public class Listener extends BroadListener {
 		
 		else if (port == GlobalVariable.receveSpeakerIDPort) {
 			System.out.println(GlobalVariable.ID + "_" + "become a speaker");
-			if (info == GlobalVariable.ID) {
+			if (GlobalVariable.ID.equals(info)) {
 				GlobalVariable.isSpeaker = true;
 			}	
 		}

@@ -27,8 +27,9 @@ public class MakeConcensus {
 				msg_map.remove(m.timestamp);
 			}
 		}
-		else if (m.operation_code == Constants.REQB || m.operation_code == Constants.REQR)
+		else if (m.operation_code == Constants.REQB || m.operation_code == Constants.REQR) {
 			msg_map.put(m.timestamp, m);
+		}
 		
 		broadcast(BROADCASTTYPY.REQUESTRESPONSE, m.toString());
 	}
@@ -86,63 +87,28 @@ public class MakeConcensus {
 
 	public void listen() {
 		// 监听回应请求
-		Thread t1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Listener responseListnener = new Listener(GlobalVariable.requestResponsePort);
-				Thread t = new Thread(responseListnener);
-				t.start();
-			}
-
-		});
-		t1.start();
+		Listener responseListnener = new Listener(GlobalVariable.requestResponsePort);
+		Thread t = new Thread(responseListnener);
+		t.start();
 
 		// 监听block请求
-		Thread t2 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Listener responseListnener = new Listener(GlobalVariable.requestBlockPort);
-				Thread t = new Thread(responseListnener);
-				t.start();
-			}
-
-		});
-		t2.start();
+		Listener blockResponseListnener = new Listener(GlobalVariable.requestBlockPort);
+		Thread tblock = new Thread(blockResponseListnener);
+		tblock.start();
 
 		// 监听回应响应
-		Thread t3 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Listener responseListnener = new Listener(GlobalVariable.sendResponsePort);
-				Thread t = new Thread(responseListnener);
-				t.start();
-			}
-
-		});
+		Listener responseListnener3 = new Listener(GlobalVariable.sendResponsePort);
+		Thread t3 = new Thread(responseListnener3);
 		t3.start();
 
 		// 监听block响应
-		Thread t4 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Listener responseListnener = new Listener(GlobalVariable.sendBlockPort);
-				Thread t = new Thread(responseListnener);
-				t.start();
-			}
-
-		});
+		Listener responseListnener4 = new Listener(GlobalVariable.sendBlockPort);
+		Thread t4 = new Thread(responseListnener4);
 		t4.start();
 		
 		// 监听block响应
-		Thread t5 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Listener responseListnener = new Listener(GlobalVariable.receveSpeakerIDPort);
-				Thread t = new Thread(responseListnener);
-				t.start();
-			}
-
-		});
+		Listener responseListnener5 = new Listener(GlobalVariable.receveSpeakerIDPort);
+		Thread t5 = new Thread(responseListnener5);
 		t5.start();
 	}
 
