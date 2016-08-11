@@ -15,7 +15,7 @@ public class DB {
     private DB() {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:third.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:" + GlobalVariable.dbPath);
             statement = connection.createStatement();
             initialTables();
         } catch (SQLException e) {

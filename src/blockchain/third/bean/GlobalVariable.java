@@ -1,9 +1,8 @@
 package blockchain.third.bean;
 
-import java.awt.List;
-import java.io.FileInputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,21 +23,26 @@ public class GlobalVariable {
 	
 	// 监听加入网络的计算机的端口
 	public static int joinListenPort;
-	// 普通节点加入网络时与根节点通信的端口
+	// 普通节点加入网络时与根节点通信的端口，用于接收IP列表
 	public static int listenToRootPort;
+	// 接受根节点发过来的DB文件
+	public static int receiveRootFilePort;
+	// DB文件的存储路径
+	public static String dbPath;
 	
 	static {
 		properties = PropertyUtil.loadProps("system.properties");
 		
-		isSpeaker = PropertyUtil.getBoolean(properties, "isMiner", false);
+		isSpeaker = PropertyUtil.getBoolean(properties, "isSpeaker", false);
 		isRoot = PropertyUtil.getBoolean(properties, "isRoot", false);
-		ID = PropertyUtil.getString(properties, "id");
+		ID = PropertyUtil.getString(properties, "ID");
 		joinListenPort = PropertyUtil.getInt(properties, "joinListenPort");
 		listenToRootPort = PropertyUtil.getInt(properties, "listenToRootPort");
-		
+		receiveRootFilePort = PropertyUtil.getInt(properties, "receiveRootFilePort");
+		dbPath = PropertyUtil.getString(properties, "dbPath");
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 	}
 	
