@@ -3,6 +3,7 @@ package blockchain.third.communication;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
 
 public class BroadListener implements Runnable {
@@ -26,25 +27,32 @@ public class BroadListener implements Runnable {
 	}
 
 	public void run() {
+		
 		byte[] buf = new byte[1024];// 暂存
 		StringBuffer sbuf = new StringBuffer();
 		try {
+			InetAddress addr = InetAddress.getLocalHost();
+			String localip=addr.getHostAddress().toString();//获得本机IP
 			ds = new DatagramSocket(port);
 			dp = new DatagramPacket(buf, buf.length);
 			System.out.println("My port:" + port + " opened");
 			while (!ds.isClosed()) {
 				ds.receive(dp);
-				for (int i = 0; i < 1024; i++) {
-					if (buf[i] == 0) {
-						break;
+				InetAddress getIP=dp.getAddress();
+				if(!localip.equals(getIP.toString().substring(1))){
+					for (int i = 0; i < 1024; i++) {
+						if (buf[i] == 0) {
+							break;
+						}
+						sbuf.append((char) buf[i]);
 					}
-					sbuf.append((char) buf[i]);
+					doIT(sbuf.toString());   //进行操作
 				}
-				doIT(sbuf.toString());   //进行操作
 				buf = new byte[1024];
 				dp = new DatagramPacket(buf, buf.length);
 				sbuf = new StringBuffer();
 			}
+			
 		} catch (SocketException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
