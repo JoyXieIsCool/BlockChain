@@ -3,7 +3,11 @@ package blockchain.third.communication;
 public class Lis {
 		
 	public static void main(String[] args) {
-		UniTest t=new UniTest(3000);
+		
+		FileListener t =new FileListener(5000);
+		t.setPath("E:/get/b.txt");
+		
+//		UniTest t=new UniTest(3000);
 		Thread t1 = new Thread(t);
 		t1.start();
 		
