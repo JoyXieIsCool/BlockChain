@@ -41,6 +41,8 @@ public class Listener extends BroadListener {
 				} else {
 					s_msg.value = 0;
 				}
+				MakeConcensus.m_tmpBlock.addRecord(msg.toString());
+				MakeConcensus.m_tmpBlock.addRecord(s_msg.toString());
 				System.out.println(GlobalVariable.ID + "_" + "get a  request");
 				MakeConcensus.broadcast(BROADCASTTYPY.SENDRESPOSE,
 						s_msg.toString());
