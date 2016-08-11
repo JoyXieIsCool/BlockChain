@@ -13,6 +13,7 @@ import blockchain.third.bean.GlobalVariable;
 import blockchain.third.bean.Message;
 import blockchain.third.communication.BroadCast;
 import blockchain.third.communication.BroadListener;
+import blockchain.third.communication.UniCast;
 
 public class MakeConcensus {
 	
@@ -34,7 +35,15 @@ public class MakeConcensus {
 		
 		broadcast(BROADCASTTYPY.REQUESTRESPONSE, m.toString());
 	}
-
+	
+	
+	public static void unicast(String ip, int port,String str){
+		UniCast uni = new UniCast(ip,port);
+		uni.Send(str);
+		System.out.println(GlobalVariable.ID + "_" + "send a block");
+		
+	}
+	
 	public static void broadcast(BROADCASTTYPY type, String str) {
 
 		switch (type) {
@@ -68,6 +77,11 @@ public class MakeConcensus {
 			BroadCast sendBlock = new BroadCast(GlobalVariable.sendBlockPort);
 			System.out.println(GlobalVariable.ID + "_" + "send a block");
 			sendBlock.Send(str);
+			
+			
+			
+			
+			
 			break;
 		
 		case SENDSPEAKERID:
@@ -103,7 +117,10 @@ public class MakeConcensus {
 		t3.start();
 
 		// 监听block响应
-		Listener responseListnener4 = new Listener(GlobalVariable.sendBlockPort);
+		
+		//Listener responseListnener4 = new Listener(GlobalVariable.sendBlockPort);
+		//Narc
+		RequestListener responseListnener4 = new RequestListener(GlobalVariable.sendBlockPort);
 		Thread t4 = new Thread(responseListnener4);
 		t4.start();
 		
@@ -133,7 +150,7 @@ public class MakeConcensus {
 		
 	}
 
-	static Block m_tmpBlock = new Block(DB.getDBInstance().getLastBlockHash());
+	public static Block m_tmpBlock = new Block(DB.getDBInstance().getLastBlockHash());
 	int roler;
 	int state;
 	static Block finalBlock;

@@ -1,15 +1,10 @@
 package blockchain.third.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import blockchain.third.bean.BROADCASTTYPY;
-import blockchain.third.bean.Block;
 import blockchain.third.bean.Constants;
-import blockchain.third.bean.DB;
 import blockchain.third.bean.GlobalVariable;
 import blockchain.third.bean.Message;
-import blockchain.third.communication.BroadCast;
 import blockchain.third.communication.BroadListener;
 import blockchain.third.utils.JsonUtil;
 
@@ -19,7 +14,6 @@ public class Listener extends BroadListener {
 
 	public Listener(int p) {
 		super(p);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void doIT(String info) {
@@ -53,9 +47,20 @@ public class Listener extends BroadListener {
 		else if (port == GlobalVariable.requestBlockPort) {
 			//这里改成单播！！！！！！！！！
 			//////////////////////////////////////////////////////////
+			
+			
+			//Narc
 			MakeConcensus.m_tmpBlock.generateHash();
-			MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
-					JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
+			String[] tmp = info.split("_");
+			String SpeakerIP = GlobalVariable.ipList.get(tmp[0].toString());
+			MakeConcensus.unicast(SpeakerIP, GlobalVariable.sendBlockPort,JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
+			//Narc
+			
+//			MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
+//					JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
+			
+			
+			
 			// send block;
 			System.out
 					.println(GlobalVariable.ID + "_" + "get a  block request");
@@ -90,7 +95,7 @@ public class Listener extends BroadListener {
 			}
 
 		}
-
+/*
 		// 接受BLOCK
 		else if (port == GlobalVariable.sendBlockPort) {
 			System.out.println("--------vote here------");
@@ -148,7 +153,7 @@ public class Listener extends BroadListener {
 
 			}
 		}
-
+*/
 		else if (port == GlobalVariable.receveSpeakerIDPort) {
 			System.out.println(GlobalVariable.ID + "_" + "become a speaker");
 			if (GlobalVariable.ID.equals(info)) {
