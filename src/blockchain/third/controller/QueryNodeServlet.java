@@ -1,29 +1,27 @@
 package blockchain.third.controller;
 
 import java.io.IOException;
+import java.io.Writer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import blockchain.third.utils.JsonUtil;
+
 /**
- * 接收用户的提交请求
+ * 查询当前有哪些节点
  */
-public class SubmitBillServlet extends HttpServlet{
+@SuppressWarnings("serial")
+public class QueryNodeServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		System.out.println("收到！");
-		resp.getWriter().write("good~");
-		resp.getWriter().flush();
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		super.doPost(req, resp);
+		Writer writer = resp.getWriter();
+		writer.write(JsonUtil.getNodeInfo());
+		writer.flush();
 	}
 
 }

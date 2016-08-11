@@ -30,6 +30,11 @@ public class GlobalVariable {
 	// DB文件的存储路径
 	public static String dbPath;
 	
+	public static int requestResponsePort;
+	public static int requestBlockPort;
+	public static int sendResponsePort;
+	public static int sendBlockPort;
+	
 	static {
 		properties = PropertyUtil.loadProps("system.properties");
 		
@@ -40,6 +45,12 @@ public class GlobalVariable {
 		listenToRootPort = PropertyUtil.getInt(properties, "listenToRootPort");
 		receiveRootFilePort = PropertyUtil.getInt(properties, "receiveRootFilePort");
 		dbPath = PropertyUtil.getString(properties, "dbPath");
+		
+		requestResponsePort = PropertyUtil.getInt(properties, "requestResponsePort");
+		requestBlockPort = PropertyUtil.getInt(properties, "requestBlockPort");
+		sendResponsePort = PropertyUtil.getInt(properties, "sendResponsePort");
+		sendBlockPort = PropertyUtil.getInt(properties, "sendBlockPort");
+				
 	}
 	
 	public static void main(String[] args) throws IOException {

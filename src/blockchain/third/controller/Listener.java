@@ -22,8 +22,8 @@ public class Listener extends BroadListener {
 
 	public void doIT(String info) {
 
-		// ������Ӧ����
-		if (port == 10001) {
+		// 监听响应请求
+		if (port == GlobalVariable.requestResponsePort) {
 			Message msg = new Message(info);
 			if (msg.receiver == GlobalVariable.ID) {
 				Message s_msg = new Message(info);
@@ -42,14 +42,14 @@ public class Listener extends BroadListener {
 			}
 		}
 
-		// ����BLOCK����
-		else if (port == 10002) {
+		// 监听BLOCK请求
+		else if (port == GlobalVariable.requestBlockPort) {
 			MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK, MakeConcensus.m_tmpBlock.toString());
 			// send block;
 		}
 
-		// ������Ӧ
-		else if (port == 10003) {
+		// 接受响应
+		else if (port == GlobalVariable.sendResponsePort) {
 			Message msg = new Message(info);
 
 			// add a new record;
@@ -72,8 +72,8 @@ public class Listener extends BroadListener {
 
 		}
 
-		// ����BLOCK
-		else if (port == 10004) {
+		// 接受BLOCK
+		else if (port == GlobalVariable.sendBlockPort) {
 			Block block = new Block(info);
 			MakeConcensus.block_arr.add(block);
 			
@@ -111,7 +111,7 @@ public class Listener extends BroadListener {
 			}
 		}
 
-		// ������д�ķ���
+		// 用来重写的方法
 		System.out.println("DoSomething" + info);
 	}
 

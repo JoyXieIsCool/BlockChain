@@ -8,9 +8,27 @@
         <servlet-class>blockchain.third.controller.SubmitBillServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>queryNodeServlet</servlet-name>
+        <servlet-class>blockchain.third.controller.QueryNodeServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>queryBlockServlet</servlet-name>
+        <servlet-class>blockchain.third.controller.QueryBlockServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
  
     <servlet-mapping>
         <servlet-name>submitBillServlet</servlet-name>
         <url-pattern>/submit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>queryNodeServlet</servlet-name>
+        <url-pattern>/queryNode</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>queryBlockServlet</servlet-name>
+        <url-pattern>/queryBlock</url-pattern>
     </servlet-mapping>
 </web-app>

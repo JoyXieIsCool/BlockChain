@@ -38,13 +38,13 @@ public class MakeConcensus {
 		switch (type) {
 
 		case REQUESTRESPONSE:
-			BroadCast requstResponse = new BroadCast(10001);
+			BroadCast requstResponse = new BroadCast(GlobalVariable.requestResponsePort);
 			requstResponse.Send(str);
 			break;
 
 		case REQUSTBLOCK:
 
-			BroadCast requstBlock = new BroadCast(10002);
+			BroadCast requstBlock = new BroadCast(GlobalVariable.requestBlockPort);
 			Message msg = new Message();
 			msg.operation_code = Constants.RESBLOCK;
 			requstBlock.Send(msg.toString());
@@ -53,13 +53,13 @@ public class MakeConcensus {
 			
 
 		case SENDRESPOSE:
-			BroadCast sendResponse = new BroadCast(10003);
+			BroadCast sendResponse = new BroadCast(GlobalVariable.sendResponsePort);
 			sendResponse.Send(":my IP");
 			break;
 
 		case SENDBLOCK:
 			// dispatch block;
-			BroadCast sendBlock = new BroadCast(10004);
+			BroadCast sendBlock = new BroadCast(GlobalVariable.sendBlockPort);
 			sendBlock.Send(m_tmpBlock.toString());
 			break;
 
@@ -72,11 +72,11 @@ public class MakeConcensus {
 	}
 
 	public void listen() {
-		// ¼àÌý»ØÓ¦ÇëÇó
+		// 监听回应请求
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Listener responseListnener = new Listener(10003);
+				Listener responseListnener = new Listener(GlobalVariable.sendResponsePort);
 				Thread t = new Thread(responseListnener);
 				t.start();
 			}
@@ -84,11 +84,11 @@ public class MakeConcensus {
 		});
 		t1.start();
 
-		// ¼àÌýblockÇëÇó
+		// 监听block请求
 		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Listener responseListnener = new Listener(10004);
+				Listener responseListnener = new Listener(GlobalVariable.sendBlockPort);
 				Thread t = new Thread(responseListnener);
 				t.start();
 			}
@@ -96,11 +96,11 @@ public class MakeConcensus {
 		});
 		t2.start();
 
-		// ¼àÌý»ØÓ¦ÏìÓ¦
+		// 监听回应响应
 		Thread t3 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Listener responseListnener = new Listener(10003);
+				Listener responseListnener = new Listener(GlobalVariable.sendResponsePort);
 				Thread t = new Thread(responseListnener);
 				t.start();
 			}
@@ -108,11 +108,11 @@ public class MakeConcensus {
 		});
 		t3.start();
 
-		// ¼àÌýblockÏìÓ¦
+		// 监听block响应
 		Thread t4 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Listener responseListnener = new Listener(10004);
+				Listener responseListnener = new Listener(GlobalVariable.sendBlockPort);
 				Thread t = new Thread(responseListnener);
 				t.start();
 			}

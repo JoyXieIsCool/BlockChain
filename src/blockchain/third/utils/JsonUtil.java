@@ -1,6 +1,5 @@
 package blockchain.third.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -8,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import blockchain.third.bean.Block;
-import blockchain.third.bean.Constants;
+import blockchain.third.bean.GlobalVariable;
 
 public class JsonUtil {
     
@@ -39,4 +38,16 @@ public class JsonUtil {
         }
     }
 
+    public static String getNodeInfo() {
+    	JSONObject nodeInfo = new JSONObject();
+    	try {
+			nodeInfo.put("me", GlobalVariable.ID);
+			nodeInfo.put("nodes", GlobalVariable.ipList.keySet());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+    	
+    	return nodeInfo.toString();
+    }
+    
 }
