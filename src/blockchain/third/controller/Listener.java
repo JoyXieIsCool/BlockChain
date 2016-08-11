@@ -48,6 +48,8 @@ public class Listener extends BroadListener {
 
 		// 监听BLOCK请求
 		else if (port == GlobalVariable.requestBlockPort) {
+			//这里改成单播！！！！！！！！！
+			MakeConcensus.m_tmpBlock.generateHash();
 			MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
 					MakeConcensus.m_tmpBlock.toString());
 			// send block;
@@ -71,6 +73,7 @@ public class Listener extends BroadListener {
 				System.out.println("now tmpBlock size is: " + MakeConcensus.m_tmpBlock.getBlockSize());
 
 				if (MakeConcensus.m_tmpBlock.getBlockSize() >= GlobalVariable.blockMaxRecord) {
+					MakeConcensus.m_tmpBlock.generateHash();
 					if (GlobalVariable.isSpeaker) {
 						MakeConcensus.broadcast(BROADCASTTYPY.REQUSTBLOCK, "");
 					} else {
