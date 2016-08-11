@@ -1,15 +1,21 @@
 package blockchain.third.communication;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.io.IOException;
+//import java.net.InetAddress;
+//import java.net.UnknownHostException;
 //发送口
 public class Cast {
 
-	public static void main(String[] args) throws UnknownHostException {
+	public static void main(String[] args) throws IOException {
 		String IP="127.0.0.1";
-		String myIP=InetAddress.getLocalHost().toString();
-		UniCast RecordCast = new UniCast(IP, 3000);
-		RecordCast.Send(myIP+":P2P_RecordCast");
+//		String myIP=InetAddress.getLocalHost().toString();
+		FileCast filec=new FileCast(5000);
+		String filePath="D:/desktop/a.txt";
+		filec.Send(IP, filePath);
+		
+		
+//		UniCast RecordCast = new UniCast(IP, 3000);
+//		RecordCast.Send(myIP+":P2P_RecordCast");
 //		UniCast BlockCast = new UniCast(IP, 3001);
 //		BlockCast.Send(myIP+":my block");
 //		BroadCast IPCast = new BroadCast(4000);
