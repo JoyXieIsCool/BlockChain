@@ -13,9 +13,9 @@ public class TerminalController {
 	public static void main(String[] args) {
 		// 部署节点
 		new JoinController();
+		MakeConcensus.listen();
 		// 
 		new TerminalController().decideOperation();
-		MakeConcensus.listen();
 	}
 
 	public String decideOperation() {

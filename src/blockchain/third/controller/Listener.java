@@ -21,6 +21,7 @@ public class Listener extends BroadListener {
 	}
 
 	public void doIT(String info) {
+System.out.println("*************" + info);
 
 		// 监听响应请求
 		if (port == GlobalVariable.requestResponsePort) {

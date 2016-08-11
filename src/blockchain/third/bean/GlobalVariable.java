@@ -54,6 +54,7 @@ public class GlobalVariable {
 		requestBlockPort = PropertyUtil.getInt(properties, "requestBlockPort");
 		sendResponsePort = PropertyUtil.getInt(properties, "sendResponsePort");
 		sendBlockPort = PropertyUtil.getInt(properties, "sendBlockPort");
+		receveSpeakerIDPort = PropertyUtil.getInt(properties, "receveSpeakerIDPort");
 				
 		blockMaxRecord = PropertyUtil.getInt(properties, "blockMaxRecord");
 		maxIpTable = PropertyUtil.getInt(properties, "maxIpTable");
