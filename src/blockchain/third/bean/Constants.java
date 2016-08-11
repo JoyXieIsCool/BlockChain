@@ -9,4 +9,5 @@ public class Constants {
     public static final int RESBLOCK = 1004;//return response
     public static final int MESSAGE_LENGTH = 5;
     public static final int ERROR_VALUE = -999;
+    public static final String JSON_FORMAT = "json";
 }
