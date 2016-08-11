@@ -8,6 +8,7 @@ import java.util.Map;
 import blockchain.third.bean.BROADCASTTYPY;
 import blockchain.third.bean.Block;
 import blockchain.third.bean.Constants;
+import blockchain.third.bean.DB;
 import blockchain.third.bean.GlobalVariable;
 import blockchain.third.bean.Message;
 import blockchain.third.communication.BroadCast;
@@ -132,7 +133,7 @@ public class MakeConcensus {
 		
 	}
 
-	static Block m_tmpBlock;
+	static Block m_tmpBlock = new Block(DB.getDBInstance().getLastBlockHash());
 	int roler;
 	int state;
 	static Block finalBlock;
