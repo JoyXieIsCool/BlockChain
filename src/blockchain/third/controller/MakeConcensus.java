@@ -85,7 +85,7 @@ public class MakeConcensus {
 		;
 	}
 
-	public void listen() {
+	public static void listen() {
 		// 监听回应请求
 		Listener responseListnener = new Listener(GlobalVariable.requestResponsePort);
 		Thread t = new Thread(responseListnener);

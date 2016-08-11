@@ -15,6 +15,7 @@ public class TerminalController {
 		new JoinController();
 		// 
 		new TerminalController().decideOperation();
+		MakeConcensus.listen();
 	}
 
 	public String decideOperation() {
