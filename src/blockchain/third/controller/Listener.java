@@ -99,6 +99,7 @@ public class Listener extends BroadListener {
 			if (GlobalVariable.isSpeaker == false) {
 				// write final block
 				DB.getDBInstance().addBlock(block);
+				MakeConcensus.m_tmpBlock.clear();
 				return;
 			}
 			
@@ -149,6 +150,7 @@ public class Listener extends BroadListener {
 						JsonUtil.transBlock2JsonStr(MakeConcensus.finalBlock));
 				System.out.println("-----speaker write block------");
 				DB.getDBInstance().addBlock(MakeConcensus.finalBlock);
+				MakeConcensus.m_tmpBlock.clear();
 
 			}
 		}

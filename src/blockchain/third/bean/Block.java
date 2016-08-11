@@ -64,5 +64,11 @@ public class Block implements Serializable {
         this.hash = MD5.parseStrToMd5U32(target_hash_string);
     }
     
+    public void clear() {
+    	this.pre_hash = this.hash;
+        this.hash = null;
+        this.content.clear();
+    }
+    
 
 }
