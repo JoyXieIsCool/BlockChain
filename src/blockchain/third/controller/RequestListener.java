@@ -65,11 +65,12 @@ public class RequestListener extends UniListener {
 			}
 			MakeConcensus.choseNextSpeaker();
 			MakeConcensus.finalBlock = res_block;
-			MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
+			MakeConcensus.broadcast(BROADCASTTYPY.FINALBLOCK,
 					JsonUtil.transBlock2JsonStr(MakeConcensus.finalBlock));
 			System.out.println("-----speaker write block------");
 			DB.getDBInstance().addBlock(MakeConcensus.finalBlock);
 			MakeConcensus.block_arr.clear();
+			MakeConcensus.m_tmpBlock.clear();
 		}
 	}
 

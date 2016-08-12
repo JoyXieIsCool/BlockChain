@@ -50,9 +50,11 @@ public class MakeConcensus {
 		// // decide send what response in each time;
 		if (isAck) {
 			s_msg.value = 1;
+			
 		} else {
 			s_msg.value = 0;
 		}
+		GlobalVariable.needResponse=false;
 		MakeConcensus.m_tmpBlock.addRecord(msg.toString());
 		MakeConcensus.m_tmpBlock.addRecord(s_msg.toString());
 		System.out.println(GlobalVariable.ID + "_" + "get a  request");
