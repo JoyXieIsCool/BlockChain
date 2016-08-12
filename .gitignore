@@ -18,3 +18,5 @@ WebContent/WEB-INF/classes
 Servers/
 
 /bin/
+
+WeIdea/node_modules
