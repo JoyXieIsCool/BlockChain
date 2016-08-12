@@ -83,8 +83,8 @@ public class DB {
                 temp_block.generateHash();
                 blocks.add(temp_block);
             }    
-            if (last_len != 0 && blocks.size() <= last_len) {
-                return blocks;
+            if (last_len != 0 && blocks.size() < last_len) {
+                return new ArrayList<Block>();
             }
             for (int index = 0; index < last_len; index++)
             {
@@ -93,7 +93,7 @@ public class DB {
             return blocks;
         } catch (SQLException e) {
             e.printStackTrace();
-            return blocks;
+            return new ArrayList<Block>();
         }
     }
     
