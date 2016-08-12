@@ -26,15 +26,11 @@ public class RequestListener extends UniListener {
 			DB.getDBInstance().addBlock(block);
 			return;
 		}
-		
+
 		MakeConcensus.block_arr.add(block);
 		System.out.println(GlobalVariable.ID + "_" + "get a  block");
 		if (GlobalVariable.isSpeaker
-<<<<<<< HEAD
-				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable-1) {
-=======
-				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable) {
->>>>>>> parent of c8c4def... 早上好
+				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable - 1) {
 			Map<String, Integer> blk_map = new HashMap<String, Integer>();
 
 			for (Block b : MakeConcensus.block_arr) {
