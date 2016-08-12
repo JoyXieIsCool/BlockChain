@@ -56,9 +56,9 @@ export class DisplayZoneComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(){
-    this.timer = setTimeout(()=>{
-      this.updateBlocks();
-    }, 1000);
+    if(!!this.timer){
+      clearTimeout(this.timer);
+    }
   }
 
   updateBlocks(){
