@@ -1,15 +1,12 @@
 package blockchain.third.bean;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.sqlite.JDBC;
-
-import com.sun.corba.se.spi.oa.NullServant;
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath.Step;
-
-import blockchain.third.utils.JsonUtil;
 
 public class DB {
 
