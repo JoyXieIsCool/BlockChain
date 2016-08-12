@@ -6,25 +6,17 @@ import java.util.List;
 
 import org.sqlite.JDBC;
 
+import com.sun.corba.se.spi.oa.NullServant;
+import com.sun.org.apache.xerces.internal.impl.xpath.XPath.Step;
+
 import blockchain.third.utils.JsonUtil;
 
 public class DB {
 
     private volatile static DB db_instance = null;
-    private Connection connection = null;
-    private Statement statement = null;
       
     private DB() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:" + GlobalVariable.dbPath);
-            statement = connection.createStatement();
-            initialTables();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    	initialTables();
     }
     
     public static DB getDBInstance() {  
@@ -40,7 +32,7 @@ public class DB {
     
     private void initialTables() {
         try {
-            statement.executeUpdate("create table if not exists records(record_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            getStatement().executeUpdate("create table if not exists records(record_id INTEGER PRIMARY KEY AUTOINCREMENT," +
             		"pre_hash varchar(50) NOT NULL," +
                     "body blob," +
             		"hash varchar(50)" +
@@ -53,7 +45,7 @@ public class DB {
     public boolean addBlock(Block block) {
         try {
             for (String block_record : block.getBlockContent()) {
-                statement.executeUpdate("insert into records(pre_hash, body, hash) values('" + 
+                getStatement().executeUpdate("insert into records(pre_hash, body, hash) values('" + 
                         block.pre_hash + "', '" + block_record + "', '" + block.hash + "');");
             }
             return true;
@@ -67,7 +59,7 @@ public class DB {
         List<Block> blocks = new ArrayList<Block>();
         Block temp_block = null;
         try {
-            ResultSet result = statement.executeQuery("select * from records order by record_id");
+            ResultSet result = getStatement().executeQuery("select * from records order by record_id");
             while(result.next()) {
             	
                 if (temp_block == null || !temp_block.pre_hash.equals(result.getString("pre_hash"))) {
@@ -99,7 +91,7 @@ public class DB {
     
     public String getLastBlockHash() {
     	try {
-			ResultSet result = statement.executeQuery("select hash from records order by record_id desc limit 1;");
+			ResultSet result = getStatement().executeQuery("select hash from records order by record_id desc limit 1;");
 			if (result.next()) {
 				return result.getString(1);
 			}
@@ -109,6 +101,24 @@ public class DB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "0";
+		}
+    }
+    
+    @SuppressWarnings("finally")
+	private Statement getStatement() {
+    	Connection connection = null;
+    	Statement statement = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			connection = DriverManager.getConnection("jdbc:sqlite:" + GlobalVariable.dbPath);
+			statement = connection.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			return statement;
 		}
     }
 
