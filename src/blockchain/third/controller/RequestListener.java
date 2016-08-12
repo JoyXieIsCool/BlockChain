@@ -30,7 +30,7 @@ public class RequestListener extends UniListener {
 		MakeConcensus.block_arr.add(block);
 		System.out.println(GlobalVariable.ID + "_" + "get a  block");
 		if (GlobalVariable.isSpeaker
-				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable - 1) {
+				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable) {
 			Map<String, Integer> blk_map = new HashMap<String, Integer>();
 			MakeConcensus.block_arr.add(MakeConcensus.m_tmpBlock);
 			

@@ -28,7 +28,7 @@ public class QueryResponseServlet extends HttpServlet{
 		PrintWriter writer = response.getWriter();
 		
 		if (GlobalVariable.needResponse == true) {
-			writer.write("{\"alert\": \"1\", \"msg\":" + GlobalVariable.alertMessage + "}");
+			writer.write("{\"alert\": \"1\", \"msg\":\"" + GlobalVariable.alertMessage + "\"}");
 		} else {
 			writer.write("{\"alert\": \"0\"}");
 		}
@@ -50,10 +50,15 @@ public class QueryResponseServlet extends HttpServlet{
 		if ("Y".equals(isAck)) {
 			// 发送确认广播
 			MakeConcensus.ackRequest(true);
+			System.out.println(GlobalVariable.ID + " 同意");
 		} else {
 			// 发送否认广播
 			MakeConcensus.ackRequest(false);
+			System.out.println(GlobalVariable.ID + " 不同意");
 		}
+		
+		response.getWriter().write("{\"status\":\"1\"}");
+		response.getWriter().flush();
 	}
 
 }

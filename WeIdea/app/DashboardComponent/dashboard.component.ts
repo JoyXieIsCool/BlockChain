@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
         console.log(value)
         if(!!value["alert"] && value["alert"] == '1'){
           that.needComfirm = true;
-          let tmp = value.message.split('_');
+          let tmp = value.msg.split('_');
           let [instruct, from, to, amount, date] = tmp;
           let o = {
             instruct, from, to, date,

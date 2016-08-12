@@ -54,7 +54,7 @@ var DashboardComponent = (function () {
                 console.log(value);
                 if (!!value["alert"] && value["alert"] == '1') {
                     that.needComfirm = true;
-                    var tmp = value.message.split('_');
+                    var tmp = value.msg.split('_');
                     var instruct = tmp[0], from = tmp[1], to = tmp[2], amount = tmp[3], date = tmp[4];
                     var o = {
                         instruct: instruct, from: from, to: to, date: date,

@@ -26,10 +26,9 @@ public class SpeakerDEAD extends Timer {
 		try {
 			if (ping(TimerVar.SpeakerIP)) {
 				// Speaker并不没有死亡！重发数据包
-				UniCast unicast = new UniCast(TimerVar.SpeakerIP,
-						TimerVar.SpeakerPort);
-				unicast.Send(JsonUtil
-						.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
+				System.out.println("Speaker并不没有死亡！重发数据包"+JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
+				MakeConcensus.unicast(TimerVar.SpeakerIP, GlobalVariable.sendBlockPort,
+						JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
 				restart();
 			} else {
 				System.out.println("Speaker is dead. Find a new Speaker");

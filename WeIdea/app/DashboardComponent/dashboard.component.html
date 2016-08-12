@@ -12,8 +12,7 @@
   <header>
     <span class="date">{{message.date | cdate}}</span>
     <span class="from">{{message.from}}</span>
-    <span class="action">希望您{{message.instruct | instruct2Action}}</span>
-    <span class="to">{{message.to}}</span>
+    <span class="action">{{ message.instruct == 1000 ? '向您借取': message.instruct == 1002 ? '还给您' : ''}}</span>
     <span class="amount">{{message.amount | currency:'CNY':true}}</span>
   </header>
   <div class="body">
