@@ -9,12 +9,12 @@
         <div class="bar" @colorRun></div>
       </div>
       <div class="transctions">
-        <div class="transction" *ngFor="let transction of block.ttransctions;let i = index" [class.selfTransction]="mine==transction.from || mine==transction.to">
+        <div class="transction" *ngFor="let transction of block.ttransctions;let i = index" >
             <span class="date">{{transction.date | cdate}}</span>
-            <span class="from">{{transction.from}}</span>
+            <span class="from" [class.selfTransction]="mine==transction.from || mine==transction.to">{{transction.from}}</span>
             <span class="action" *ngIf="transction.instruct == '1000' || transction.instruct == '1002'">{{transction.instruct | instruct2Action}}</span>
             <span class="action" *ngIf="transction.instruct == '1001' || transction.instruct == '1003'">{{transction.amount == '1' ? ' 已收到' : '未收到'}}</span>
-            <span class="to">{{transction.to}}</span>
+            <span class="to" [class.selfTransction]="mine==transction.from || mine==transction.to">{{transction.to}}</span>
             <span class="amount" *ngIf="transction.instruct == '1000' || transction.instruct == '1002'">{{transction.amount | currency:'CNY':true}}</span>
             <span class="other" *ngIf="transction.instruct == '1001' || transction.instruct == '1003'">{{transction.amount == '1' ? '的借款' : '的欠款'}}</span>
         </div>        
