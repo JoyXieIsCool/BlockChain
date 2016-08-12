@@ -13,6 +13,7 @@ src/test/java
 .classpath
 .project
 *.properties
+*.db
 WebContent/WEB-INF/classes
 Servers/
 
