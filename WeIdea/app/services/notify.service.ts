@@ -15,7 +15,7 @@ export class NotifyService{
   }
   //查看是否有新数据
   get(){
-    return this.http.get(this.url).map((r:Response)=>r.json());
+    return this.http.get(this.url).map((r:Response)=> r.json());
   }
 
   //返回用户选择

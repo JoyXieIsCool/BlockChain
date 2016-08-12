@@ -18,7 +18,7 @@ var CdatePipe = (function () {
         var date_arr = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})/.exec(value);
         if (date_arr) {
             formatDate = date_arr[1] + '/' + date_arr[2] + '/' + date_arr[3] + ' ' +
-                date_arr[4] + ':' + date_arr[5] + ':' + date_arr[6] + ':' + date_arr[7];
+                date_arr[4] + ':' + date_arr[5] + ':' + date_arr[6];
         }
         return formatDate;
     };

@@ -14,7 +14,7 @@ import blockchain.third.utils.JsonUtil;
 public class Listener extends BroadListener {
 
 	public static boolean state = false;
-
+	private static SpeakerDEAD s = new SpeakerDEAD(GlobalVariable.countDown);
 	public Listener(int p) {
 		super(p);
 	}
@@ -49,11 +49,11 @@ public class Listener extends BroadListener {
 			// Narc
 
 			// 容错
-			SpeakerDEAD s = new SpeakerDEAD(GlobalVariable.countDown);
+			
 			TimerVar.SpeakerID = SpeakerID;
 			TimerVar.SpeakerIP = SpeakerIP;
 			Thread timer = new Thread(s);
-			timer.start();
+			//timer.start();
 
 			// MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
 			// JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
@@ -109,6 +109,7 @@ public class Listener extends BroadListener {
 			// write final block
 			DB.getDBInstance().addBlock(block);
 			MakeConcensus.m_tmpBlock.clear();
+			s.setOK();
 			// return;
 		} else if (port == GlobalVariable.receveSpeakerIDPort) {
 			System.out.println(GlobalVariable.ID + "_" + "become a speaker");

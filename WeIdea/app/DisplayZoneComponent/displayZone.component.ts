@@ -70,8 +70,9 @@ export class DisplayZoneComponent implements OnInit, OnDestroy{
             //后台查找了，直接push进去就好
             console.log(value)
             console.log(Array.isArray(value.transctions))
-            if(Array.isArray(value.transctions)){
-              value.ttransctions = value.transctions.map((transction) => {
+            if(Array.isArray(value)){
+              value.forEach((cur) => {
+              	cur.ttransctions = cur.content.map((transction) => {
                 let tmp = transction.split('_');
                 let [instruct, from, to, amount, date] = tmp;
                 let o = {
@@ -79,10 +80,12 @@ export class DisplayZoneComponent implements OnInit, OnDestroy{
                   amount : +amount
                 };
                 return o;
-              });
+              })
               counter ++;
               //倒着插入
-              that.blocks.unshift(value);
+              that.blocks.unshift(cur);              
+              })
+
             }
             console.log(that.blocks);
           },
