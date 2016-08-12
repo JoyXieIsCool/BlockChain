@@ -47,17 +47,11 @@ public class Listener extends BroadListener {
 			MakeConcensus.unicast(SpeakerIP, GlobalVariable.sendBlockPort,
 					JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
 			// Narc
-
 			// 容错
-			
 			TimerVar.SpeakerID = SpeakerID;
 			TimerVar.SpeakerIP = SpeakerIP;
 			Thread timer = new Thread(s);
-			//timer.start();
-
-			// MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
-			// JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
-
+			timer.start();
 			// Narc
 
 			// MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,

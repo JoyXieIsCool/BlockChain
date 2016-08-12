@@ -2,6 +2,7 @@ package blockchain.third.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import blockchain.third.bean.BROADCASTTYPY;
 import blockchain.third.bean.Block;
@@ -20,6 +21,10 @@ public class RequestListener extends UniListener {
 	public void doIT(String info) {
 		System.out.println("--------vote here------");
 		System.out.println("info is:" + info);
+		//容灾测试Narc
+		Scanner scanner = new Scanner(System.in);
+		String str = scanner.next();
+		
 		Block block = new Block(info, Constants.JSON_FORMAT);
 		if (GlobalVariable.isSpeaker == false) {
 			// write final block
