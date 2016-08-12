@@ -7,7 +7,8 @@ import { Component,
           style,
           transition,
           keyframes,
-          animate } from '@angular/core';
+          animate,
+          Input } from '@angular/core';
 import { BlockService } from '../services/block.service';
 import { CdatePipe } from '../pipes/cdate.pipe';
 import { Instruct2Action } from '../pipes/instruct2Action.pipe' 
@@ -32,12 +33,12 @@ import { Instruct2Action } from '../pipes/instruct2Action.pipe'
 export class DisplayZoneComponent implements OnInit, OnDestroy{
   blocks : [] = [];
   blocksReverse : [] = [];
-
   timer : any;
-
   oldGuy : number = 0;
-
   newGuy : number = 0;
+
+  @Input()
+  mine:string;
 
   constructor(private blockService : BlockService){
   }

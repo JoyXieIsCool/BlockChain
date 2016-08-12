@@ -3,7 +3,7 @@
     <terminal-board [roles]="roles" [mine]="mine"></terminal-board>
   </header>
   <role-list [roles]="roles" [mine]="mine" [newRoles]="newRoles" (yeap)="yeap()"></role-list>
-  <display-zone></display-zone>
+  <display-zone [mine]="mine"></display-zone>
   <scroll-to-top></scroll-to-top>
 </main>
 

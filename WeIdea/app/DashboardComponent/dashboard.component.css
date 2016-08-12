@@ -47,7 +47,7 @@ body{
 
 .notification span:nth-child(even){
   font-size: 18px;
-  font-weight: blod;
+  font-weight: bold;
   padding: 6px;
 }
 .notification span:last-child{
