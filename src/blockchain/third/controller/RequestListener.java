@@ -34,8 +34,9 @@ public class RequestListener extends UniListener {
 
 		MakeConcensus.block_arr.add(block);
 		System.out.println(GlobalVariable.ID + "_" + "get a  block");
+		// 当收到的块的数量大于等于网络中节点数的50%时，发起共识
 		if (GlobalVariable.isSpeaker
-				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable) {
+				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable * 0.5) {
 			Map<String, Integer> blk_map = new HashMap<String, Integer>();
 			MakeConcensus.block_arr.add(MakeConcensus.m_tmpBlock);
 
