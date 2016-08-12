@@ -75,6 +75,10 @@ var DisplayZoneComponent = (function () {
             that.updateBlocks();
         }, 1000);
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], DisplayZoneComponent.prototype, "mine", void 0);
     DisplayZoneComponent = __decorate([
         core_1.Component({
             selector: 'display-zone',

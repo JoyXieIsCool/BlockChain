@@ -89,8 +89,8 @@ h2 > img:last-child{
   font-size     : 16px;
   text-align    : left;
 }
-.transction.selfTransction{
-  background-color: #fefefe;
+.selfTransction{
+  color: #2196F3;
   /*color: white;*/
 }
 .transction:nth-child(even){
