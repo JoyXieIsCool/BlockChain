@@ -18,7 +18,7 @@ import { InstructService } from '../services/instruct.service';
   providers   : [InstructService];
   animations  : [
     trigger('fadeOut', [
-        transition('*=>void', animate('.3s .3s easeInOut', keyframes([
+        transition('*=>void', animate('.3s .3s ease-in-out', keyframes([
             style({offset:0, opacity: 1}),
             style({offset:1, opacity: 0})
           ])))

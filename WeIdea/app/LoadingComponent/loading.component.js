@@ -58,7 +58,7 @@ var LoadingComponent = (function () {
             animations: [
                 core_1.trigger('logoFade', [
                     core_1.transition('void => *', [
-                        core_1.animate('1.5s 1.5s easeInOut', core_1.keyframes([
+                        core_1.animate('1.5s 1.5s ease-in-out', core_1.keyframes([
                             core_1.style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
                             core_1.style({ opacity: 1, transform: 'translateY(0px)', offset: 0.125 }),
                             core_1.style({ transform: 'translateY(-100px)', offset: 0.25 }),
@@ -72,7 +72,7 @@ var LoadingComponent = (function () {
                 ]),
                 core_1.trigger('scaleImg', [
                     core_1.transition('void => *', [
-                        core_1.animate('1.5s 1s easeInOut', core_1.keyframes([
+                        core_1.animate('1.5s 1s ease-in-out', core_1.keyframes([
                             core_1.style({ opacity: 0, transform: 'scale(1.3)', offset: 0 }),
                             core_1.style({ opacity: 1, transform: 'rotate(-28deg)', offset: 0.5 })
                         ]))
@@ -80,7 +80,7 @@ var LoadingComponent = (function () {
                 ]),
                 core_1.trigger('fadeDiv', [
                     core_1.transition('void => *', [
-                        core_1.animate('1.5s 1s easeInOut', core_1.keyframes([
+                        core_1.animate('1.5s 1s ease-in-out', core_1.keyframes([
                             core_1.style({ opacity: 0, offset: 0 }),
                             core_1.style({ opacity: 1, offset: 1 })
                         ]))

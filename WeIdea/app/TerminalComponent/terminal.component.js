@@ -73,7 +73,7 @@ var TerminalComponent = (function () {
             providers: [instruct_service_1.InstructService],
             animations: [
                 core_1.trigger('fadeOut', [
-                    core_1.transition('*=>void', core_1.animate('.3s .3s easeInOut', core_1.keyframes([
+                    core_1.transition('*=>void', core_1.animate('.3s .3s ease-in-out', core_1.keyframes([
                         core_1.style({ offset: 0, opacity: 1 }),
                         core_1.style({ offset: 1, opacity: 0 })
                     ])))

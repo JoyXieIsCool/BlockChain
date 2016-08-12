@@ -17,7 +17,7 @@ import{ Title } from '@angular/platform-browser';
   animations: [
     trigger('logoFade', [
         transition('void => *', [
-            animate('1.5s 1.5s easeInOut', keyframes([
+            animate('1.5s 1.5s ease-in-out', keyframes([
               style({opacity:0, transform: 'translateY(-200px)', offset: 0}),
               style({opacity:1, transform: 'translateY(0px)', offset: 0.125}),
               style({transform: 'translateY(-100px)', offset: 0.25}),
@@ -31,7 +31,7 @@ import{ Title } from '@angular/platform-browser';
       ]),
     trigger('scaleImg', [
       transition('void => *',[
-          animate('1.5s 1s easeInOut', keyframes([
+          animate('1.5s 1s ease-in-out', keyframes([
             style({opacity:0, transform: 'scale(1.3)', offset: 0}),
             style({opacity:1, transform: 'rotate(-28deg)', offset: 0.5})
             ]))
@@ -39,7 +39,7 @@ import{ Title } from '@angular/platform-browser';
       ]),
     trigger('fadeDiv',[
       transition('void => *',[
-          animate('1.5s 1s easeInOut', keyframes([
+          animate('1.5s 1s ease-in-out', keyframes([
             style({opacity:0, offset: 0}),
             style({opacity:1, offset: 1})
             ]))
