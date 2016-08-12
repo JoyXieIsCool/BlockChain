@@ -17,7 +17,7 @@ import{ Title } from '@angular/platform-browser';
   animations: [
     trigger('logoFade', [
         transition('void => *', [
-            animate('1.5s 1.5s easeInOutBack', keyframes([
+            animate('1.5s 1.5s easeInOut', keyframes([
               style({opacity:0, transform: 'translateY(-200px)', offset: 0}),
               style({opacity:1, transform: 'translateY(0px)', offset: 0.125}),
               style({transform: 'translateY(-100px)', offset: 0.25}),

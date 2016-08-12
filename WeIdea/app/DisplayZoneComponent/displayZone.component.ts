@@ -20,7 +20,7 @@ import { Instruct2Action } from '../pipes/instruct2Action.pipe'
   animations : [
     trigger('colorRun', [
         transition('void => *', [
-            animate('1s 1s easeInOutBack', keyframes([
+            animate('1s 1s easeInOut', keyframes([
                 style({'width': '0', offset: 0}),
                 style({'width': '100%', offset: 1})
               ]))

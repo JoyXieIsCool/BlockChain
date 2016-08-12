@@ -58,7 +58,7 @@ var LoadingComponent = (function () {
             animations: [
                 core_1.trigger('logoFade', [
                     core_1.transition('void => *', [
-                        core_1.animate('1.5s 1.5s easeInOutBack', core_1.keyframes([
+                        core_1.animate('1.5s 1.5s easeInOut', core_1.keyframes([
                             core_1.style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
                             core_1.style({ opacity: 1, transform: 'translateY(0px)', offset: 0.125 }),
                             core_1.style({ transform: 'translateY(-100px)', offset: 0.25 }),

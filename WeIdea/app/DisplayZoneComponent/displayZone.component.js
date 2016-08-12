@@ -84,7 +84,7 @@ var DisplayZoneComponent = (function () {
             animations: [
                 core_1.trigger('colorRun', [
                     core_1.transition('void => *', [
-                        core_1.animate('1s 1s easeInOutBack', core_1.keyframes([
+                        core_1.animate('1s 1s easeInOut', core_1.keyframes([
                             core_1.style({ 'width': '0', offset: 0 }),
                             core_1.style({ 'width': '100%', offset: 1 })
                         ]))
