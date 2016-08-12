@@ -103,7 +103,7 @@ public class Listener extends BroadListener {
 			// write final block
 			DB.getDBInstance().addBlock(block);
 			MakeConcensus.m_tmpBlock.clear();
-			s.setOK();
+//			s.setOK();
 			// return;
 		} else if (port == GlobalVariable.receveSpeakerIDPort) {
 			System.out.println(GlobalVariable.ID + "_" + "become a speaker");
