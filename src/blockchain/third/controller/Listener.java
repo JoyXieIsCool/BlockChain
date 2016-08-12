@@ -48,9 +48,9 @@ public class Listener extends BroadListener {
 					JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
 			// Narc
 			// 容错
-			TimerVar.SpeakerID = SpeakerID;
-			TimerVar.SpeakerIP = SpeakerIP;
-			Thread timer = new Thread(s);
+//			TimerVar.SpeakerID = SpeakerID;
+//			TimerVar.SpeakerIP = SpeakerIP;
+//			Thread timer = new Thread(s);
 			//timer.start();
 			// Narc
 
@@ -111,8 +111,5 @@ public class Listener extends BroadListener {
 				GlobalVariable.isSpeaker = true;
 			}
 		}
-
-		// 用来重写的方法
-		System.out.println("DoSomething" + info);
 	}
 }
