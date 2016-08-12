@@ -1,0 +1,18 @@
+<section class="roles">
+  <header>
+    <figure>
+      <img src="images/user.png" 
+      ><figcaption>
+        <span title="本机用户">{{mine}}</span>
+      </figcaption>
+    </figure>
+  </header>
+  <div class="body">
+    <p>其他节点用户：</p>
+    <p *ngFor="let role of roles;let i = index">
+      <span>{{i+1}}</span>:
+      <span>{{role}}</span>
+    </p>    
+  </div>
+
+</section>

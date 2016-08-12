@@ -1,0 +1,131 @@
+.displayZone-outer{
+  width: 600px;
+  height: auto;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  /*box-shadow: 0 0 10px 5px #ccc;*/
+  margin: 50px auto;
+}
+
+h2{
+  /*border-bottom: 1px solid #ccc;*/
+  cursor: pointer;
+}
+h2 > img{
+  -webkit-transition : all .5s ease-in-out;
+  -o-transition      : all .5s ease-in-out;
+  transition         : all .5s ease-in-out;
+}
+h2 > span{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+h2 > img:first-child{
+  transform: translateX(-20px);
+}
+h2 > img:last-child{
+  transform: translateX(20px);
+}
+.displayZone-outer:hover h2 > img{
+  transform: translateX(0);
+}
+.decorator{
+  position: relative;
+  width: 100%;
+  height: 40px;
+}
+.decorator .bar{
+  position                   : absolute;
+  left                       : 0;
+  top                        : 50%;
+  margin-top                 : -5px;
+  width                      : 100%;
+  height                     : 10px;
+  border-bottom-right-radius : 5px;
+  border-top-right-radius    : 5px;
+  background-color           : #8BC34A;           
+  background                 : linear-gradient(to right,#27ae60 20%,#2ecc71);
+  z-index                    : 2;
+}
+.decorator .circle{
+  width            : 40px;
+  height           : 40px;
+  background-color : #34495e;
+  border-radius    : 50%;
+  position         : absolute;
+  z-index          : 3;
+}
+
+.block{
+  position           : relative;
+  margin-bottom      : 20px;
+  /*border           : 1px solid #ccc;*/
+  /*background-color : #f1f1f1;*/
+  padding            : 10px;
+  transition         : background-color .4s ease-in-out;
+  /*border-bottom    : 3px solid #8BC34A;*/
+}
+
+.transctions{
+  padding                    : 30px 25px;
+  position                   : relative;
+  margin-top                 : -22px;
+  border                     : 1px solid #ccc;
+  border-bottom-right-radius : 6px;
+  border-bottom-left-radius  : 6px;
+}
+.transctions:hover{
+  box-shadow         : 0 3px 3px #ccc;
+  -webkit-transition : all .3s ease-in-out;
+  -o-transition      : all .3s ease-in-out;
+  transition         : all .3s ease-in-out;  
+}
+
+.transction{
+  border-bottom : 1px solid #ccc;
+  padding       : 10px;
+  font-size     : 16px;
+  text-align    : left;
+}
+
+.transction span:nth-child(even){
+  font-size: 18px;
+  font-weight: blod;
+  padding: 6px;
+}
+.transction span:last-child{
+  margin-left: 50px;
+}
+
+.date{
+  margin-right: 50px;
+}
+
+.blockInfo{
+  text-align    : right;
+  color         : #9E9E9E;
+  position      : absolute;
+  width         : 100%;
+  top           : 0;
+  padding-right : 25px;
+}
+
+.glyphicon {
+  position: absolute;
+  vertical-align: middle;
+  top: 50%;
+  left: 50%;
+  margin-top: -10px;
+  margin-left: -10px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  font-size: 20px;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

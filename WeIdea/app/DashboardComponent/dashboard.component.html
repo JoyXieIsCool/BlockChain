@@ -1,0 +1,24 @@
+<main class="dashboard">
+  <header>
+    <terminal-board [roles]="roles" [mine]="mine"></terminal-board>
+  </header>
+  <role-list [roles]="roles" [mine]="mine"></role-list>
+  <display-zone></display-zone>
+  <scroll-to-top></scroll-to-top>
+</main>
+
+<section class="shadow" *ngIf="needComfirm"></section>
+<section class="notification" *ngIf="needComfirm">
+  <header>
+    <span class="date">{{message.date | cdate}}</span>
+    <span class="from">{{message.from}}</span>
+    <span class="action">希望您{{message.instruct | instruct2Action}}</span>
+    <span class="to">{{message.to}}</span>
+    <span class="amount">{{message.amount | currency:'CNY':true}}</span>
+  </header>
+  <div class="body">
+    <span class="agree"  (click)="featBack(true)">欣然答应</span>
+    <span class="disagree" (click)="featBack(false)">残忍拒绝</span>
+  </div>
+</section>
+

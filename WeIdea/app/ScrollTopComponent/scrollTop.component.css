@@ -1,0 +1,23 @@
+.scrollTop{
+  position: fixed;
+  width: 64px;
+  height: 64px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 2px 1px #B5B5B5;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.scrollTop:hover{
+  box-shadow: 0 0 5px 2px #A2A2A2
+}
+.scrollTopInner{
+  width: 100%;
+  height: 100%;
+  background-image: url("images/arrow-up.png");
+  /*background-size: cover;*/
+  background-repeat: no-repeat;
+  background-position: center center;
+}

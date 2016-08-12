@@ -1,0 +1,52 @@
+.roles{
+  width: 300px;
+  background-color: white;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+  box-shadow: 0 0 10px #ccc;
+  width: 150px;
+  height: 300px;
+  position: fixed;
+  left: -130px;
+  top: 50%;
+  margin-top: -150px;
+  background-color: white;
+  box-shadow: 0 0 10px 3px #252424;
+  overflow: hidden;
+  padding: 10px;
+  transition: all .3s ease-in-out;
+}
+.roles:hover{
+  left: 0;
+  box-shadow: 0 0 10px 2px #585858;
+}
+.roles:hover .body{
+  overflow: auto;
+}
+
+figure{
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+figure > img, figure > figcaption{
+  display: inline-block;
+}
+
+figure > img{
+  margin-right: 10px;
+}
+
+figure > figcaption{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.body{
+  height: 240px;
+  overflow: hidden;
+}
+p{
+  text-align: center;
+}

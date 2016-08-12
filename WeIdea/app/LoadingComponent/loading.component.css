@@ -1,0 +1,80 @@
+.loading-center{
+  position   : relative;
+  width      : 100%;
+  height     : 100%;
+  min-height : 500px;
+}
+.loading-inner{
+  position          : absolute;
+  left              : 50%;
+  top               : 50%;
+  margin-left       : -90px;
+  margin-top        : -90px;
+  width             : 180px;
+  height            : 180px;
+  /*border          : 1px solid #ccc;*/
+  border-radius     : 50%;
+  box-shadow        : 0 0 15px 2px #435C94;
+  text-align        : center;
+  background-color  : #435C94;
+  -webkit-animation : fade 1.5s ease-in-out infinite alternate;
+  -o-animation      : fade 1.5s ease-in-out infinite alternate;
+  animation         : fade 1.5s ease-in-out infinite alternate;
+}
+.loading-inner img{
+  width  : 90px;
+  margin : 45px auto;
+}
+
+.loading-circle-1, .loading-circle-2{
+  position          : absolute;
+  left              : 50%;
+  top               : 50%;
+  margin-left       : -150px;
+  margin-top        : -150px;
+  width             : 300px;
+  height            : 300px;
+  border-top        : 2px solid #435C94;
+  /*border-bottom   : 2px solid #435C94;*/
+  border-radius     : 50%;
+  opacity           : 0;
+  -webkit-animation : rot 3s ease-in-out 2s infinite alternate-reverse;
+  -o-animation      : rot 3s ease-in-out 2s infinite alternate-reverse;
+  animation         : rot 3s ease-in-out 2s infinite alternate-reverse;
+}
+.loading-circle-2{
+  width                       : 500px;
+  height                      : 500px;
+  margin-left                 : -250px;
+  border-top                  : none;
+  border-bottom               : 2px solid #435C94;
+  margin-top                  : -250px;
+  -webkit-transform           : rotate(90deg);
+  -ms-transform               : rotate(90deg);
+  -o-transform                : rotate(90deg);
+  transform                   : rotate(90deg);
+  -webkit-animation-direction : alternate;
+  -o-animation-direction      : alternate;
+  animation-direction         : alternate;
+/*  -webkit-animation : rot 3s ease-in-out 2s infinite;
+  -o-animation      : rot 3s ease-in-out 2s infinite;
+  animation         : rot 3s ease-in-out 2s infinite;*/
+}
+
+@-webkit-keyframes fade{
+  0%{box-shadow:0 0 20px 12px #435C94; background-color: #435C94;}
+  100%{box-shadow:0 0 10px 2px #435C94; background-color: #3B5080;}
+}
+@keyframes fade{
+  0%{box-shadow:0 0 20px 12px #435C94; background-color: #435C94;}
+  100%{box-shadow:0 0 10px 2px #435C94; background-color: #3B5080;}
+}
+
+@-webkit-keyframes rot{
+  0%{opacity: .5; -webkit-transform: rotate(0deg);}
+  100%{opacity: 1; -webkit-transform: rotate(360deg);}
+}
+@keyframes rot{
+  0%{opacity: .5; -webkit-transform: rotate(0deg);}
+  100%{opacity: 1; -webkit-transform: rotate(360deg);}
+}

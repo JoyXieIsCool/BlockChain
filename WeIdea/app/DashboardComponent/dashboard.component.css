@@ -1,0 +1,84 @@
+body{
+  overflow: auto;
+}
+.dashboard{
+
+}
+
+.dashboard > header{
+  width               : 100%;
+  height              : 500px;
+  background-image    : url(images/1.jpg);
+  background-position : center center;
+}
+
+.shadow{
+  position         : fixed;
+  width            : 100%;
+  height           : 100%;
+  background-color : black;
+  opacity          : .95;
+  top              : 0;
+  left             : 0;
+}
+
+.notification{
+  position         : absolute;
+  width            : 500px;
+  height           : 150px;
+  left             : 50%;
+  top              : 50%;
+  background-color : white;
+  margin-top       : -75px;
+  margin-left      : -250px;
+  padding          : 20px;
+  border-radius    : 3px;
+}
+.notification > header{
+
+}
+.notification > header{
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.notification span:nth-child(even){
+  font-size: 18px;
+  font-weight: blod;
+  padding: 6px;
+}
+.notification span:last-child{
+  margin-left: 50px;
+}
+
+.date{
+  margin-right: 50px;
+}
+.notification > .body{
+  padding: 10px 0;
+  height: 50px;
+  text-align: center;
+}
+.notification > .body > span{
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 14px;
+  border: 2px solid #4CAF50;
+  color: #4CAF50;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.notification > .body > span:hover{
+  color: white;
+  background-color: #4CAF50;
+}
+.notification > .body > span:last-child{
+  border-color: #C62828;
+  color: #C62828;
+}
+.notification > .body > span:last-child:hover{
+  color: white;
+  background-color: #C62828;
+}
