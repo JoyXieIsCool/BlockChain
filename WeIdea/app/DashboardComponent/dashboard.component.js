@@ -43,9 +43,9 @@ var DashboardComponent = (function () {
             clearTimeout(this.timer);
         }
         console.log(that.roles);
-        // this.timer = setTimeout(()=>{
-        //   that.updateRoles();
-        // }, 1000)
+        this.timer = setTimeout(function () {
+            that.updateRoles();
+        }, 1000);
     };
     DashboardComponent.prototype.getMessage = function () {
         var that = this;

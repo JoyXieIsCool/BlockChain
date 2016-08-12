@@ -58,7 +58,8 @@ export class TerminalComponent{
     //提交
     if(!this.amount) return;
     this.state = 4;
-    this.instructService.post().subscribe(data => {
+    let str = this.action + '_' + this.mine + '_' + this.target + '_' + this.amount;
+    this.instructService.post(str).subscribe(data => {
       this.isSuccess = data.status == '1' ?　true : false;
       this.state = 5;
     });

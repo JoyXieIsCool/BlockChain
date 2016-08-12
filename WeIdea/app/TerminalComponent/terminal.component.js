@@ -43,7 +43,8 @@ var TerminalComponent = (function () {
         if (!this.amount)
             return;
         this.state = 4;
-        this.instructService.post().subscribe(function (data) {
+        var str = this.action + '_' + this.mine + '_' + this.target + '_' + this.amount;
+        this.instructService.post(str).subscribe(function (data) {
             _this.isSuccess = data.status == '1' ? true : false;
             _this.state = 5;
         });

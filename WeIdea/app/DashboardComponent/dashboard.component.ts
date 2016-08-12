@@ -56,9 +56,9 @@ export class DashboardComponent implements OnInit, OnDestroy{
       clearTimeout(this.timer);
     }
     console.log(that.roles)
-    // this.timer = setTimeout(()=>{
-    //   that.updateRoles();
-    // }, 1000)
+    this.timer = setTimeout(()=>{
+      that.updateRoles();
+    }, 1000)
   }
 
   getMessage(){
