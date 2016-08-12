@@ -3,8 +3,8 @@ package blockchain.third.communication;
 import java.io.IOException;
 import java.net.InetAddress;
 //import java.net.UnknownHostException;
-//发送口
-public class Cast {
+//发送口测试类
+public class CastTest {
 
 	public static void main(String[] args) throws IOException {
 //		String IP="127.0.0.1";
