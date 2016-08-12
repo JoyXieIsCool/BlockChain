@@ -71,9 +71,9 @@ var DisplayZoneComponent = (function () {
         if (!!that.timer) {
             clearTimeout(that.timer);
         }
-        // that.timer = setTimeout(()=>{
-        //   that.updateBlocks();
-        // }, 1000);
+        that.timer = setTimeout(function () {
+            that.updateBlocks();
+        }, 1000);
     };
     DisplayZoneComponent = __decorate([
         core_1.Component({

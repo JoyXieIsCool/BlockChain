@@ -98,8 +98,8 @@ export class DisplayZoneComponent implements OnInit, OnDestroy{
     if(!!that.timer){
       clearTimeout(that.timer);
     }
-    // that.timer = setTimeout(()=>{
-    //   that.updateBlocks();
-    // }, 1000);
+    that.timer = setTimeout(()=>{
+      that.updateBlocks();
+    }, 1000);
   }
 }
