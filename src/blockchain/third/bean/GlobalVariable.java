@@ -16,10 +16,6 @@ public class GlobalVariable {
 	public static boolean isSpeaker;
 	// 是否是核心节点，负责对新加入的块转发数据和IP表
 	public static boolean isRoot;
-	// 标记是否需要应答
-	public static volatile boolean needResponse = false;
-	// 前端弹窗的信息，一般是命令，如1000_A_B_666_201608120230999
-	public static String alertMessage = "";
 	// 自己的ID
 	public static String ID;
 	// ID和IP映射表
@@ -33,12 +29,13 @@ public class GlobalVariable {
 	public static int receiveRootFilePort;
 	// DB文件的存储路径
 	public static String dbPath;
+	//倒计时时间设置
+	public static int countDown;
 	
 	public static int requestResponsePort;
 	public static int requestBlockPort;
 	public static int sendResponsePort;
 	public static int sendBlockPort;
-	public static int sendFinalBlockPort;
 	public static int receveSpeakerIDPort;
 	
 	public static int blockMaxRecord;
@@ -59,11 +56,14 @@ public class GlobalVariable {
 		requestBlockPort = PropertyUtil.getInt(properties, "requestBlockPort");
 		sendResponsePort = PropertyUtil.getInt(properties, "sendResponsePort");
 		sendBlockPort = PropertyUtil.getInt(properties, "sendBlockPort");
-		sendFinalBlockPort=PropertyUtil.getInt(properties, "sendFinalBlockPort");
 		receveSpeakerIDPort = PropertyUtil.getInt(properties, "receveSpeakerIDPort");
-		
+				
 		blockMaxRecord = PropertyUtil.getInt(properties, "blockMaxRecord");
 		maxIpTable = PropertyUtil.getInt(properties, "maxIpTable");
+		
+		//容错
+		countDown = PropertyUtil.getInt(properties, "countDown");
+		
 	}
 	
 	public static void main(String[] args) throws IOException {
