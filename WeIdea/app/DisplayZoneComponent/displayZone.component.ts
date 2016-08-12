@@ -56,7 +56,9 @@ export class DisplayZoneComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(){
-
+    this.timer = setTimeout(()=>{
+      this.updateBlocks();
+    }, 1000);
   }
 
   updateBlocks(){
@@ -73,20 +75,19 @@ export class DisplayZoneComponent implements OnInit, OnDestroy{
             console.log(Array.isArray(value.transctions))
             if(Array.isArray(value)){
               value.forEach((cur) => {
-              	cur.ttransctions = cur.content.map((transction) => {
-                let tmp = transction.split('_');
-                let [instruct, from, to, amount, date] = tmp;
-                let o = {
-                  instruct, from, to, date,
-                  amount : +amount
-                };
-                return o;
-              })
+              cur.ttransctions = cur.content.map((transction) => {
+                  let tmp = transction.split('_');
+                  let [instruct, from, to, amount, date] = tmp;
+                  let o = {
+                    instruct, from, to, date,
+                    amount : +amount
+                  };
+                  return o;
+                })
               counter ++;
               //倒着插入
               that.blocks.unshift(cur);              
               })
-
             }
             console.log(that.blocks);
           },

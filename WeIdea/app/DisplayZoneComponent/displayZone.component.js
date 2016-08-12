@@ -31,6 +31,10 @@ var DisplayZoneComponent = (function () {
         // }, 1000)
     };
     DisplayZoneComponent.prototype.ngOnDestroy = function () {
+        var _this = this;
+        this.timer = setTimeout(function () {
+            _this.updateBlocks();
+        }, 1000);
     };
     DisplayZoneComponent.prototype.updateBlocks = function () {
         var that = this;
