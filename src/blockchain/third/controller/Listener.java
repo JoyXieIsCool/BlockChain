@@ -51,7 +51,7 @@ public class Listener extends BroadListener {
 			TimerVar.SpeakerID = SpeakerID;
 			TimerVar.SpeakerIP = SpeakerIP;
 			Thread timer = new Thread(s);
-			timer.start();
+			//timer.start();
 			// Narc
 
 			// MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,

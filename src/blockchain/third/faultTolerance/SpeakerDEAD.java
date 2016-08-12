@@ -1,7 +1,11 @@
 package blockchain.third.faultTolerance;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import blockchain.third.bean.BROADCASTTYPY;
@@ -43,13 +47,12 @@ public class SpeakerDEAD extends Timer {
 				int sum = GlobalVariable.ipList.size() + 1;
 				int key = minute % sum;
 				String SpeakerID = "";
-				if (key != 0) {
-					String[] keySet = (String[]) GlobalVariable.ipList.keySet()
-							.toArray();
-					SpeakerID = keySet[key];
-				} else {
-					SpeakerID = GlobalVariable.ID;
-				}
+				List<String> keySet = new ArrayList<String>(
+						GlobalVariable.ipList.keySet());
+				keySet.add(GlobalVariable.ID);
+				Collections.sort(keySet);
+				System.out.println("SP53: " + keySet.get(0) + "key=" + key);
+				SpeakerID = keySet.get(key);
 
 				if (SpeakerID.equals(GlobalVariable.ID)) {
 					// 我是speaker！！

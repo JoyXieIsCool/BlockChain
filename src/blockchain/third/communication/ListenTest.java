@@ -1,6 +1,6 @@
 package blockchain.third.communication;
 //接收口
-public class Lis {
+public class ListenTest {
 		
 	public static void main(String[] args) {
 		

@@ -21,8 +21,9 @@ public class UniListener implements Runnable {
 		System.out.println("Get UniCast" + info);
 	}
 	public void run() {
+		ServerSocket serverSocket=null;
 		try {
-			ServerSocket serverSocket = new ServerSocket(port);  //新建Socket
+			serverSocket = new ServerSocket(port);  //新建Socket
 			String IP=InetAddress.getLocalHost().toString(); //获得本机IP
 			System.out.println(IP+" PC " + port + "is listening"); //输出状态
 			while (true) {
