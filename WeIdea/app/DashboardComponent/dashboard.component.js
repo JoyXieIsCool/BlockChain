@@ -18,7 +18,6 @@ var terminal_component_1 = require('../TerminalComponent/terminal.component');
 var scrollTop_component_1 = require('../ScrollTopComponent/scrollTop.component');
 var cdate_pipe_1 = require('../pipes/cdate.pipe');
 var instruct2Action_pipe_1 = require('../pipes/instruct2Action.pipe');
-console.log(notify_service_1.NotifyService);
 var DashboardComponent = (function () {
     function DashboardComponent(blockService, roleService, notifyService) {
         this.blockService = blockService;

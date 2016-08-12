@@ -57,7 +57,7 @@ export class LoadingComponent implements OnDestroy,OnInit{
     private router: Router,
     private title: Title
     ){
-    console.log(title.getTitle());
+    // console.log(title.getTitle());
     let tmp = 'WeLoading';
     let i = 0;
     let setter = setInterval(()=>{

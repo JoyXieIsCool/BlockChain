@@ -13,7 +13,7 @@ var CdatePipe = (function () {
     function CdatePipe() {
     }
     CdatePipe.prototype.transform = function (value) {
-        console.log(value);
+        // console.log(value);
         var formatDate = 'yyyy/MM/dd hh:mm';
         var date_arr = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})/.exec(value);
         if (date_arr) {

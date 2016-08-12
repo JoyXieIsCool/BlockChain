@@ -18,7 +18,7 @@ var LoadingComponent = (function () {
         this.title = title;
         this.showLogo = false;
         this.showGo = false;
-        console.log(title.getTitle());
+        // console.log(title.getTitle());
         var tmp = 'WeLoading';
         var i = 0;
         var setter = setInterval(function () {

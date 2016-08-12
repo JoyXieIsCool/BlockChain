@@ -11,7 +11,6 @@ import { ScrollTopComponent } from '../ScrollTopComponent/scrollTop.component';
 import { CdatePipe } from '../pipes/cdate.pipe';
 import { Instruct2Action } from '../pipes/instruct2Action.pipe' 
 
-console.log(NotifyService)
 @Component({
   selector    : 'dashborad',
   templateUrl : 'app/DashboardComponent/dashboard.component.html',
