@@ -11,9 +11,9 @@
   border: 6px solid #F3F3F3;
 }
 .terminal > div > div{
-  -webkit-transition: all .5s ease-in-out;
-  -o-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;
+  -webkit-transition : all .5s ease-in-out;
+  -o-transition      : all .5s ease-in-out;
+  transition         : all .5s ease-in-out;
 }
 h3{
   margin: 0;

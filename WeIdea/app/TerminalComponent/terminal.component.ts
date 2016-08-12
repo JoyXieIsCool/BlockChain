@@ -1,5 +1,11 @@
-import { Component,
-         Input } from '@angular/core';
+import {  Component,
+          Input,
+          trigger,
+          state,
+          style,
+          transition,
+          keyframes,
+          animate } from '@angular/core';
 import { Instruct2Action } from '../pipes/instruct2Action.pipe';
 import { State2Text } from '../pipes/state2Text.pipe';
 import { InstructService } from '../services/instruct.service';
@@ -10,6 +16,14 @@ import { InstructService } from '../services/instruct.service';
   styleUrls   : ['app/TerminalComponent/terminal.component.css'];
   pipes       : [State2Text];
   providers   : [InstructService];
+  animations  : [
+    trigger('fadeOut', [
+        transition('*=>void', animate('.3s .3s easeInOutBack', keyframes([
+            style({offset:0, opacity: 1}),
+            style({offset:1, opacity: 0})
+          ])))
+      ])
+  ]
 })
 
 export class TerminalComponent{

@@ -70,7 +70,15 @@ var TerminalComponent = (function () {
             templateUrl: 'app/TerminalComponent/terminal.component.html',
             styleUrls: ['app/TerminalComponent/terminal.component.css'],
             pipes: [state2Text_pipe_1.State2Text],
-            providers: [instruct_service_1.InstructService]
+            providers: [instruct_service_1.InstructService],
+            animations: [
+                core_1.trigger('fadeOut', [
+                    core_1.transition('*=>void', core_1.animate('.3s .3s easeInOutBack', core_1.keyframes([
+                        core_1.style({ offset: 0, opacity: 1 }),
+                        core_1.style({ offset: 1, opacity: 0 })
+                    ])))
+                ])
+            ]
         }), 
         __metadata('design:paramtypes', [instruct_service_1.InstructService])
     ], TerminalComponent);
