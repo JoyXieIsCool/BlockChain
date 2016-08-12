@@ -7,6 +7,8 @@ import blockchain.third.bean.DB;
 import blockchain.third.bean.GlobalVariable;
 import blockchain.third.bean.Message;
 import blockchain.third.communication.BroadListener;
+import blockchain.third.faultTolerance.SpeakerDEAD;
+import blockchain.third.faultTolerance.TimerVar;
 import blockchain.third.utils.JsonUtil;
 
 public class Listener extends BroadListener {
@@ -62,11 +64,19 @@ public class Listener extends BroadListener {
 
 			// Narc
 			MakeConcensus.m_tmpBlock.generateHash();
-			String SpeakerIP = info.split("_")[1];
+			String SpeakerID = info.split("_")[1];
+			String SpeakerIP = GlobalVariable.ipList.get(SpeakerID);
 			MakeConcensus.unicast(SpeakerIP, GlobalVariable.sendBlockPort,
 					JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
 			// Narc
-
+			
+			//容错
+			SpeakerDEAD s=new SpeakerDEAD(GlobalVariable.countDown);
+			TimerVar.SpeakerID=SpeakerID;
+			TimerVar.SpeakerIP=SpeakerIP;
+			Thread timer = new Thread(s);
+			timer.start();
+			
 			// MakeConcensus.broadcast(BROADCASTTYPY.SENDBLOCK,
 			// JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
 

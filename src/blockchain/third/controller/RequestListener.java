@@ -28,13 +28,9 @@ public class RequestListener extends UniListener {
 		}
 		
 		MakeConcensus.block_arr.add(block);
-
 		System.out.println(GlobalVariable.ID + "_" + "get a  block");
 		if (GlobalVariable.isSpeaker
 				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable-1) {
-			System.out.println("R35");
-			
-			
 			Map<String, Integer> blk_map = new HashMap<String, Integer>();
 
 			for (Block b : MakeConcensus.block_arr) {

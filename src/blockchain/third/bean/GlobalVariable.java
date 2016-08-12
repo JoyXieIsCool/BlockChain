@@ -29,6 +29,8 @@ public class GlobalVariable {
 	public static int receiveRootFilePort;
 	// DB文件的存储路径
 	public static String dbPath;
+	//倒计时时间设置
+	public static int countDown;
 	
 	public static int requestResponsePort;
 	public static int requestBlockPort;
@@ -60,6 +62,10 @@ public class GlobalVariable {
 		
 		blockMaxRecord = PropertyUtil.getInt(properties, "blockMaxRecord");
 		maxIpTable = PropertyUtil.getInt(properties, "maxIpTable");
+		
+		//容错
+		countDown = PropertyUtil.getInt(properties, "countDown");
+		
 	}
 	
 	public static void main(String[] args) throws IOException {

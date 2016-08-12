@@ -3,7 +3,6 @@ package blockchain.third.controller;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,9 +13,7 @@ import blockchain.third.bean.DB;
 import blockchain.third.bean.GlobalVariable;
 import blockchain.third.bean.Message;
 import blockchain.third.communication.BroadCast;
-import blockchain.third.communication.BroadListener;
 import blockchain.third.communication.UniCast;
-import blockchain.third.utils.JsonUtil;
 
 public class MakeConcensus {
 
@@ -65,15 +62,7 @@ public class MakeConcensus {
 			BroadCast requstBlock = new BroadCast(
 					GlobalVariable.requestBlockPort);
 			Message msg = new Message();
-			InetAddress addr;
-			try {
-				addr = InetAddress.getLocalHost();
-				msg.sender = addr.getHostAddress().toString();// 获得本机IP
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			msg.sender=GlobalVariable.ID;
 			msg.operation_code = Constants.RESBLOCK;
 			System.out.println(GlobalVariable.ID + "_" + "request a block");
 			requstBlock.Send(msg.toString());
