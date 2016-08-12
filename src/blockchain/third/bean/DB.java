@@ -86,7 +86,7 @@ public class DB {
                 blocks.add(temp_block);
             }    
             if (last_len != 0 && blocks.size() <= last_len) {
-                return null;
+                return blocks;
             }
             for (int index = 0; index < last_len; index++)
             {
@@ -95,7 +95,7 @@ public class DB {
             return blocks;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return blocks;
         }
     }
     
