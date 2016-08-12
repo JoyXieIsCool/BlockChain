@@ -21,10 +21,10 @@ public class RequestListener extends UniListener {
 	public void doIT(String info) {
 		System.out.println("--------vote here------");
 		System.out.println("info is:" + info);
-		//容灾测试Narc
-		Scanner scanner = new Scanner(System.in);
-		String str = scanner.next();
-		
+		// 容灾测试Narc
+		// Scanner scanner = new Scanner(System.in);
+		// String str = scanner.next();
+
 		Block block = new Block(info, Constants.JSON_FORMAT);
 		if (GlobalVariable.isSpeaker == false) {
 			// write final block
@@ -38,7 +38,7 @@ public class RequestListener extends UniListener {
 				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable) {
 			Map<String, Integer> blk_map = new HashMap<String, Integer>();
 			MakeConcensus.block_arr.add(MakeConcensus.m_tmpBlock);
-			
+
 			for (Block b : MakeConcensus.block_arr) {
 				System.out.println(JsonUtil.transBlock2JsonStr(b));
 				if (blk_map.get(b.hash) == null || blk_map.get(b.hash) == 0)

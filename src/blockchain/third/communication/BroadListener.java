@@ -28,7 +28,6 @@ public class BroadListener implements Runnable {
 	public void doIT(String info) {
 		//用来重写的方法
 		//你需要重写这个方法来处理对监听的响应
-		//System.out.println("DoSomething" + info);
 	}
 
 	public void run() {
