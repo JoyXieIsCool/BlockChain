@@ -8,6 +8,7 @@
   margin: 0px auto;
   padding: 20px 20px;
   text-align: center;
+  border: 6px solid #F3F3F3;
 }
 .terminal > div > div{
   -webkit-transition: all .5s ease-in-out;

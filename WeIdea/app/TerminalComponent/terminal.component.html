@@ -20,6 +20,7 @@
     </div>
     <div class="target" *ngIf="state == 2">
       <select [(ngModel)]="target" name="tar" class="form-control">
+        <option value="">选择用户</option>
         <option *ngFor="let role of roles; let i = index" [value] = 'role'>{{role}}</option>
       </select>
       <button (click) = "selectTarget()" class="btn btn-primary">确定</button>

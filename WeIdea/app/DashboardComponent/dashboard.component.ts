@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   needComfirm  : Boolean = false;
   message      : any = [];
   isSuccess    : Boolean;
+  during       : number = 1000;
 
   constructor(
     private blockService: BlockService,
@@ -55,10 +56,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
     if(!!this.timer){
       clearTimeout(this.timer);
     }
-    console.log(that.roles)
+
     this.timer = setTimeout(()=>{
       that.updateRoles();
-    }, 1000)
+    }, this.during * 2)
   }
 
   getMessage(){

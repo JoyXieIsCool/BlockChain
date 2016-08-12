@@ -26,6 +26,7 @@ var DashboardComponent = (function () {
         this.notifyService = notifyService;
         this.needComfirm = false;
         this.message = [];
+        this.during = 1000;
     }
     DashboardComponent.prototype.ngOnInit = function () {
         this.updateRoles();
@@ -42,10 +43,9 @@ var DashboardComponent = (function () {
         if (!!this.timer) {
             clearTimeout(this.timer);
         }
-        console.log(that.roles);
         this.timer = setTimeout(function () {
             that.updateRoles();
-        }, 1000);
+        }, this.during * 2);
     };
     DashboardComponent.prototype.getMessage = function () {
         var that = this;
