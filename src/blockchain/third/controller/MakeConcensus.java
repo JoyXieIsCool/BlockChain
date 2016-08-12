@@ -136,6 +136,8 @@ public class MakeConcensus {
 					GlobalVariable.sendFinalBlockPort);
 			System.out.println(GlobalVariable.ID + "_" + "send a final block");
 			sendFinalBlock.Send(str);
+			// 先广播共识块，然后再广播下一任议长！！！
+			MakeConcensus.choseNextSpeaker();
 			System.out.println(GlobalVariable.ID + "_" + "send next speaker"
 					+ "_" + MakeConcensus.nextSpeaker);
 			break;

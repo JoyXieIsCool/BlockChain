@@ -28,7 +28,7 @@ public class RequestListener extends UniListener {
 		Block block = new Block(info, Constants.JSON_FORMAT);
 		if (GlobalVariable.isSpeaker == false) {
 			// write final block
-			DB.getDBInstance().addBlock(block);
+			//DB.getDBInstance().addBlock(block);
 			return;
 		}
 
@@ -68,7 +68,7 @@ public class RequestListener extends UniListener {
 					break;
 				}
 			}
-			MakeConcensus.choseNextSpeaker();
+			
 			MakeConcensus.finalBlock = res_block;
 			MakeConcensus.broadcast(BROADCASTTYPY.FINALBLOCK,
 					JsonUtil.transBlock2JsonStr(MakeConcensus.finalBlock));
@@ -76,6 +76,7 @@ public class RequestListener extends UniListener {
 			DB.getDBInstance().addBlock(MakeConcensus.finalBlock);
 			MakeConcensus.block_arr.clear();
 			MakeConcensus.m_tmpBlock.clear();
+			
 		}
 	}
 
