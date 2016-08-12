@@ -32,7 +32,8 @@ public class RequestListener extends UniListener {
 		if (GlobalVariable.isSpeaker
 				&& MakeConcensus.block_arr.size() >= GlobalVariable.maxIpTable - 1) {
 			Map<String, Integer> blk_map = new HashMap<String, Integer>();
-
+			MakeConcensus.block_arr.add(MakeConcensus.m_tmpBlock);
+			
 			for (Block b : MakeConcensus.block_arr) {
 				System.out.println(JsonUtil.transBlock2JsonStr(b));
 				if (blk_map.get(b.hash) == null || blk_map.get(b.hash) == 0)
@@ -68,7 +69,7 @@ public class RequestListener extends UniListener {
 					JsonUtil.transBlock2JsonStr(MakeConcensus.finalBlock));
 			System.out.println("-----speaker write block------");
 			DB.getDBInstance().addBlock(MakeConcensus.finalBlock);
-
+			MakeConcensus.block_arr.clear();
 		}
 	}
 
