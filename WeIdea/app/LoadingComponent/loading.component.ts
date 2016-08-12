@@ -4,7 +4,9 @@ import{ Component,
         state,
         transition,
         keyframes,
-        style } from '@angular/core';
+        style,
+        OnInit,
+        OnDestroy } from '@angular/core';
 import{ Router } from '@angular/router';
 import{ Title } from '@angular/platform-browser';
 
@@ -26,12 +28,31 @@ import{ Title } from '@angular/platform-browser';
               style({transform: 'translateY(0px)', offset: 1}),
               ]))
           ])
-
+      ]),
+    trigger('scaleImg', [
+      transition('void => *',[
+          animate('1.5s 1s easeInOut', keyframes([
+            style({opacity:0, transform: 'scale(1.3)', offset: 0}),
+            style({opacity:1, transform: 'rotate(-28deg)', offset: 0.5})
+            ]))
+        ])
+      ]),
+    trigger('fadeDiv',[
+      transition('void => *',[
+          animate('1.5s 1s easeInOut', keyframes([
+            style({opacity:0, offset: 0}),
+            style({opacity:1, offset: 1})
+            ]))
+        ])
       ])
+
   ]
 })
 
-export class LoadingComponent {
+export class LoadingComponent implements OnDestroy,OnInit{
+  showLogo : Boolean = false;
+  showGo : Boolean = false;
+
   constructor(
     private router: Router,
     private title: Title
@@ -39,7 +60,7 @@ export class LoadingComponent {
     console.log(title.getTitle());
     let tmp = 'WeLoading';
     let i = 0;
-    setInterval(()=>{
+    let setter = setInterval(()=>{
       if(i < 3){
         tmp += '.';
         i++;
@@ -48,6 +69,28 @@ export class LoadingComponent {
         i = 0;
       }
       title.setTitle(tmp);
-    }, 1000)
+    }, 500)
+
+    setTimeout(()=>{
+      this.showLogo = true;
+      clearInterval(setter);
+      title.setTitle("We借条 WeIdea");
+    }, 3000)
+
+    setTimeout(()=>{
+      this.showGo = true;
+    }, 4000)
+  }
+
+  ngOnInit(){
+    document.body.style.overflow = "hidden";
+  }
+
+  ngOnDestroy(){
+    document.body.style.overflow = "auto";
+  }
+
+  travel(){
+    this.router.navigate(['dashboard'])
   }
 }

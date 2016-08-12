@@ -46,7 +46,12 @@ export class DashboardComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(){
-
+    if(!!this.timer){
+      clearTimeout(this.timer);
+    }
+    if(!!this.messageTimer){
+      clearTimeout(this.messageTimer);
+    }
   }
 
   yeap(){

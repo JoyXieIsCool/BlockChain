@@ -13,12 +13,15 @@ var router_1 = require('@angular/router');
 var platform_browser_1 = require('@angular/platform-browser');
 var LoadingComponent = (function () {
     function LoadingComponent(router, title) {
+        var _this = this;
         this.router = router;
         this.title = title;
+        this.showLogo = false;
+        this.showGo = false;
         console.log(title.getTitle());
         var tmp = 'WeLoading';
         var i = 0;
-        setInterval(function () {
+        var setter = setInterval(function () {
             if (i < 3) {
                 tmp += '.';
                 i++;
@@ -28,8 +31,25 @@ var LoadingComponent = (function () {
                 i = 0;
             }
             title.setTitle(tmp);
-        }, 1000);
+        }, 500);
+        setTimeout(function () {
+            _this.showLogo = true;
+            clearInterval(setter);
+            title.setTitle("We借条 WeIdea");
+        }, 3000);
+        setTimeout(function () {
+            _this.showGo = true;
+        }, 4000);
     }
+    LoadingComponent.prototype.ngOnInit = function () {
+        document.body.style.overflow = "hidden";
+    };
+    LoadingComponent.prototype.ngOnDestroy = function () {
+        document.body.style.overflow = "auto";
+    };
+    LoadingComponent.prototype.travel = function () {
+        this.router.navigate(['dashboard']);
+    };
     LoadingComponent = __decorate([
         core_1.Component({
             selector: 'my-loading',
@@ -47,6 +67,22 @@ var LoadingComponent = (function () {
                             core_1.style({ transform: 'translateY(0px)', offset: 0.625 }),
                             core_1.style({ transform: 'translateY(-20px)', offset: 0.75 }),
                             core_1.style({ transform: 'translateY(0px)', offset: 1 }),
+                        ]))
+                    ])
+                ]),
+                core_1.trigger('scaleImg', [
+                    core_1.transition('void => *', [
+                        core_1.animate('1.5s 1s easeInOut', core_1.keyframes([
+                            core_1.style({ opacity: 0, transform: 'scale(1.3)', offset: 0 }),
+                            core_1.style({ opacity: 1, transform: 'rotate(-28deg)', offset: 0.5 })
+                        ]))
+                    ])
+                ]),
+                core_1.trigger('fadeDiv', [
+                    core_1.transition('void => *', [
+                        core_1.animate('1.5s 1s easeInOut', core_1.keyframes([
+                            core_1.style({ opacity: 0, offset: 0 }),
+                            core_1.style({ opacity: 1, offset: 1 })
                         ]))
                     ])
                 ])

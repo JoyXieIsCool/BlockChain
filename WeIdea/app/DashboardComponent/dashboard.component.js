@@ -35,6 +35,12 @@ var DashboardComponent = (function () {
         this.getMessage();
     };
     DashboardComponent.prototype.ngOnDestroy = function () {
+        if (!!this.timer) {
+            clearTimeout(this.timer);
+        }
+        if (!!this.messageTimer) {
+            clearTimeout(this.messageTimer);
+        }
     };
     DashboardComponent.prototype.yeap = function () {
         this.newRoles = 0;

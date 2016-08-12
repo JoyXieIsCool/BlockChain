@@ -1,4 +1,12 @@
-section.
+<div class="logo" *ngIf="showLogo" @scaleImg>
+  <img src="images/logo.png" alt=""/>
+</div>
+<div class="go" *ngIf="showGo" @fadeDiv (click)="travel()">
+  <img src="images/go.png" alt=""/>
+</div>
+<div class="yaobai" *ngIf="showGo" @fadeDiv (click)="travel()">
+  <img src="images/yaobai.png" alt=""/>
+</div>
 <section class="loading-center">
   <div @logoFade class="loading-inner">
     <img src="images/qier-eebef87c37.png" alt="qier">
