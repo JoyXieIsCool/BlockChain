@@ -52,9 +52,7 @@ public class DB {
     
     public boolean addBlock(Block block) {
         try {
-        	System.out.println("DB53: " + JsonUtil.transBlock2JsonStr(block));
             for (String block_record : block.getBlockContent()) {
-            	System.out.println("DB57: " + block_record);
                 statement.executeUpdate("insert into records(pre_hash, body, hash) values('" + 
                         block.pre_hash + "', '" + block_record + "', '" + block.hash + "');");
             }
@@ -71,7 +69,7 @@ public class DB {
         try {
             ResultSet result = statement.executeQuery("select * from records order by record_id");
             while(result.next()) {
-            	System.out.println("DB74: " + result.getString("pre_hash") + result.getString("hash") + result.getString("body"));
+            	
                 if (temp_block == null || !temp_block.pre_hash.equals(result.getString("pre_hash"))) {
                     if (temp_block != null) {
                         temp_block.generateHash();
