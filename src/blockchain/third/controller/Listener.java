@@ -106,7 +106,7 @@ public class Listener extends BroadListener {
 //			s.setOK();
 			// return;
 		} else if (port == GlobalVariable.receveSpeakerIDPort) {
-			System.out.println(GlobalVariable.ID + "_" + "become a speaker");
+			//System.out.println(GlobalVariable.ID + "_" + "become a speaker");
 			if (GlobalVariable.ID.equals(info)) {
 				GlobalVariable.isSpeaker = true;
 			}

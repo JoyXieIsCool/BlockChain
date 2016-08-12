@@ -43,7 +43,8 @@ public class MakeConcensus {
 		Message s_msg = new Message(GlobalVariable.alertMessage);
 		Message msg = new Message(GlobalVariable.alertMessage);
 
-		s_msg.operation_code = Constants.RESB;
+		// 响应码是原来请求消息的响应码+1
+		s_msg.operation_code = msg.operation_code + 1;
 		s_msg.receiver = msg.sender;
 		s_msg.sender = msg.receiver;
 		s_msg.timestamp = msg.timestamp;
