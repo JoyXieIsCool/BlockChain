@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
     let that = this;
     return that.notifyService.post(act).subscribe({
       next(value){
-        data.status == '1' ?　alert('操作成功！') : alert('操作失败！');
+        value.status == '1' ?　alert('操作成功！') : alert('操作失败！');
         that.needComfirm = false;
       }
     })

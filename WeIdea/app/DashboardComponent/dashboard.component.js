@@ -73,7 +73,7 @@ var DashboardComponent = (function () {
         var that = this;
         return that.notifyService.post(act).subscribe({
             next: function (value) {
-                data.status == '1' ? alert('操作成功！') : alert('操作失败！');
+                value.status == '1' ? alert('操作成功！') : alert('操作失败！');
                 that.needComfirm = false;
             }
         });

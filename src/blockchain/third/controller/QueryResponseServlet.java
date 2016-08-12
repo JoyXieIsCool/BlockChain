@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import blockchain.third.bean.GlobalVariable;
 
 /**
@@ -46,7 +49,15 @@ public class QueryResponseServlet extends HttpServlet{
 		
 		// 用户已经响应完了，无需再弹窗提醒
 		GlobalVariable.needResponse = false;
-		String isAck = req.getParameter("isAck");
+		String body = req.getReader().readLine();
+		String isAck = "";
+		try {
+			JSONObject jObject = new JSONObject(body);
+			isAck = jObject.getString("isAck");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
 		if ("Y".equals(isAck)) {
 			// 发送确认广播
 			MakeConcensus.ackRequest(true);

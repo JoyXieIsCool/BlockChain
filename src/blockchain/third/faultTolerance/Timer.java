@@ -25,6 +25,7 @@ public class Timer implements Runnable {
 
 	@Override
 	public void run() {
+		isOK=false;
 		while (counts > 0 && !isOK) {
 			System.out.println("还剩： " + counts + " 秒");
 			counts--;
