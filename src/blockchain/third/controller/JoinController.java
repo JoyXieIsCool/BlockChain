@@ -74,6 +74,8 @@ public class JoinController {
 		// 如果不是自己的IP则添加到IP列表中去
 		if (!localIp.equals(ip)) {
 			GlobalVariable.ipList.put(id, ip);
+			// 更新IP表的大小
+			GlobalVariable.maxIpTable = GlobalVariable.ipList.size();
 			System.out.println("Current IP List Size: " + GlobalVariable.ipList.size());
 			System.out.println(GlobalVariable.ipList.toString());
 			return ip;
@@ -119,6 +121,8 @@ public class JoinController {
 				// 如果不是自己的IP则添加到IP列表中去
 				if (!localIp.equals(ip)) {
 					GlobalVariable.ipList.put(id, ip);
+					// 更新IP表的大小
+					GlobalVariable.maxIpTable = GlobalVariable.ipList.size();
 					System.out.println("Current IP List Size: " + GlobalVariable.ipList.size());
 					System.out.println(GlobalVariable.ipList.toString());
 				}
