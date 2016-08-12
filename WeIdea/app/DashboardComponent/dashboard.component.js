@@ -51,7 +51,7 @@ var DashboardComponent = (function () {
         var that = this;
         this.notifyService.get().subscribe({
             next: function (value) {
-                console.log(value);
+                //console.log(value)
                 if (!!value["alert"] && value["alert"] == '1') {
                     that.needComfirm = true;
                     var tmp = value.msg.split('_');

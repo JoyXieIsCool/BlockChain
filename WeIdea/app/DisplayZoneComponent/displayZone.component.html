@@ -12,13 +12,14 @@
         <div class="transction" *ngFor="let transction of block.ttransctions;let i = index">
             <span class="date">{{transction.date | cdate}}</span>
             <span class="from">{{transction.from}}</span>
-            <span class="action">{{transction.instruct | instruct2Action}}</span>
+            <span class="action" *ngIf="transction.instruct == '1000' || transction.instruct == '1002'">{{transction.instruct | instruct2Action}}</span>
+            <span class="action" *ngIf="transction.instruct == '1001' || transction.instruct == '1003'">{{transction.amount == '1' ? '确认收到' : '未收到'}}</span>
             <span class="to">{{transction.to}}</span>
-            <span class="amount">{{transction.amount | currency:'CNY':true}}</span>
+            <span class="amount" *ngIf="transction.instruct == '1000' || transction.instruct == '1002'">{{transction.amount | currency:'CNY':true}}</span>
+            <span class="amonut" *ngIf="transction.instruct == '1001' || transction.instruct == '1003'">{{transction.amount == '1' ? '的借款' : '的欠款'}}</span>
         </div>        
       </div>
       <div class="blockInfo">
-        <span class="index">Index:{{len}}</span>
         <span class="hash">Hash:{{block.hash}}</span>
       </div>
     </div>

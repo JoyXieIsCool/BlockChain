@@ -44,19 +44,21 @@ var DisplayZoneComponent = (function () {
                 //后台查找了，直接push进去就好
                 console.log(value);
                 console.log(Array.isArray(value.transctions));
-                if (Array.isArray(value.transctions)) {
-                    value.ttransctions = value.transctions.map(function (transction) {
-                        var tmp = transction.split('_');
-                        var instruct = tmp[0], from = tmp[1], to = tmp[2], amount = tmp[3], date = tmp[4];
-                        var o = {
-                            instruct: instruct, from: from, to: to, date: date,
-                            amount: +amount
-                        };
-                        return o;
+                if (Array.isArray(value)) {
+                    value.forEach(function (cur) {
+                        cur.ttransctions = cur.content.map(function (transction) {
+                            var tmp = transction.split('_');
+                            var instruct = tmp[0], from = tmp[1], to = tmp[2], amount = tmp[3], date = tmp[4];
+                            var o = {
+                                instruct: instruct, from: from, to: to, date: date,
+                                amount: +amount
+                            };
+                            return o;
+                        });
+                        counter++;
+                        //倒着插入
+                        that.blocks.unshift(cur);
                     });
-                    counter++;
-                    //倒着插入
-                    that.blocks.unshift(value);
                 }
                 console.log(that.blocks);
             },
