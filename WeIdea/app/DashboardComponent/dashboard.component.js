@@ -27,6 +27,8 @@ var DashboardComponent = (function () {
         this.needComfirm = false;
         this.message = [];
         this.during = 1000;
+        this.oldRoles = 0;
+        this.newRoles = 0;
     }
     DashboardComponent.prototype.ngOnInit = function () {
         this.updateRoles();
@@ -34,11 +36,16 @@ var DashboardComponent = (function () {
     };
     DashboardComponent.prototype.ngOnDestroy = function () {
     };
+    DashboardComponent.prototype.yeap = function () {
+        this.newRoles = 0;
+        this.oldRoles = this.roles.length;
+    };
     DashboardComponent.prototype.updateRoles = function () {
         var that = this;
         this.roleService.get().subscribe(function (data) {
             that.roles = data.nodes;
             that.mine = data.me;
+            that.newRoles = that.roles.length - that.oldRoles;
         });
         if (!!this.timer) {
             clearTimeout(this.timer);
@@ -51,7 +58,6 @@ var DashboardComponent = (function () {
         var that = this;
         this.notifyService.get().subscribe({
             next: function (value) {
-                //console.log(value)
                 if (!!value["alert"] && value["alert"] == '1') {
                     that.needComfirm = true;
                     var tmp = value.msg.split('_');

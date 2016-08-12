@@ -3,24 +3,24 @@
     <h3>{{state | state2Text:act}}</h3>
   </header>
   <div>
-    <p *ngIf="state == 1">we借是一个基于区块链技术的公正平台，用户节点越多，平台越安全！妈妈再也不用担心我交易被坑啦~</p>
+    <p *ngIf="state == 1">we借条是一个基于区块链技术的公正平台，用户节点越多，平台越安全！妈妈再也不用担心我交易被坑啦~</p>
     <div class="getStart" *ngIf="state == 0">
       <button (click)="getStart()" class="btn btn-danger">开始体验！</button>
     </div>
     <div class="action" *ngIf="state == 1">
       <div class="option">
-        <span title="需要借钱？" (click)="selectAction(1)">
-          借
+        <span title="借钱？马上打欠条！" (click)="selectAction(1)">
+          借条
         </span>
       </div><div class="option">
-        <span title="马上还钱！" (click)="selectAction(2)">
-          还
+        <span title="还钱！" (click)="selectAction(2)">
+          还条
         </span>
       </div>
     </div>
     <div class="target" *ngIf="state == 2">
       <select [(ngModel)]="target" name="tar" class="form-control">
-        <option value="">选择用户</option>
+        <option value="" disabled>选择用户</option>
         <option *ngFor="let role of roles; let i = index" [value] = 'role'>{{role}}</option>
       </select>
       <button (click) = "selectTarget()" class="btn btn-primary">确定</button>
@@ -38,7 +38,7 @@
       <p *ngIf="!isSuccess">失败</p>
       <button (click) = "reset()" class="btn btn-success">再来一次</button>
     </div>
-    <div class="reset" *ngIf="state != 0 && state < 4" (click)="reset()">
+    <div class="reset" *ngIf="state != 0 && state < 4" (click)="reset()" title="重来">
       <!-- <img src="images/sync.png"  /> -->
     </div>
   </div>

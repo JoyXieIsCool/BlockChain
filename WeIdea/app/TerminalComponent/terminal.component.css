@@ -52,15 +52,15 @@ select, #terminal > input{
     height: 60px;
     line-height: 60px;
     border: 1px solid #ccc;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     font-family: "楷体";
-    font-size: 36px;
+    font-size: 18px;
 }
 
 .option > span:hover{
   box-shadow: 0 0 5px 2px #ccc;
   /*transition: all .5s ease-in-out;*/
-  animation: shade .8s ease-in-out;
+  /*animation: shade .8s ease-in-out;*/
 }
 
 .reset{

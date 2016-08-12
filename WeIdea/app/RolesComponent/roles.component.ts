@@ -1,5 +1,8 @@
 import { Component,
-         Input } from '@angular/core';
+         Input,
+         Output,
+         EventEmitter,
+         OnChange } from '@angular/core';
 
 @Component({
   selector    : 'role-list';
@@ -7,12 +10,25 @@ import { Component,
   styleUrls   : ['app/RolesComponent/roles.component.css'];
 })
 
-export class RolesComponent {
+export class RolesComponent implements OnChange{
   @Input()
-  mine    : string;
+  mine  : string;
   @Input()
   roles : [];
+  @Input()
+  newRoles : number;
+  //这个是好玩的yeap
+  @Output()
+  yeap = new EventEmitter();
+
+  clean(){
+    this.yeap.emit('Hello Guy');
+  }
 
   constructor(){}
 
+  ngOnChange(changes){
+    console.log(changes);
+    console.log('change-------');
+  }
 }

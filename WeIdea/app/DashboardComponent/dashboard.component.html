@@ -2,7 +2,7 @@
   <header>
     <terminal-board [roles]="roles" [mine]="mine"></terminal-board>
   </header>
-  <role-list [roles]="roles" [mine]="mine"></role-list>
+  <role-list [roles]="roles" [mine]="mine" [newRoles]="newRoles" (yeap)="yeap()"></role-list>
   <display-zone></display-zone>
   <scroll-to-top></scroll-to-top>
 </main>
@@ -12,7 +12,7 @@
   <header>
     <span class="date">{{message.date | cdate}}</span>
     <span class="from">{{message.from}}</span>
-    <span class="action">{{ message.instruct == 1000 ? '向您借取': message.instruct == 1002 ? '还给您' : ''}}</span>
+    <span class="action">{{ message.instruct == 1000 ? '借给您': message.instruct == 1002 ? '还给您' : ''}}</span>
     <span class="amount">{{message.amount | currency:'CNY':true}}</span>
   </header>
   <div class="body">

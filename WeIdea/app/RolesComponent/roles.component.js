@@ -11,7 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var RolesComponent = (function () {
     function RolesComponent() {
+        //这个是好玩的yeap
+        this.yeap = new core_1.EventEmitter();
     }
+    RolesComponent.prototype.clean = function () {
+        this.yeap.emit('Hello Guy');
+    };
+    RolesComponent.prototype.ngOnChange = function (changes) {
+        console.log(changes);
+        console.log('change-------');
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
@@ -20,6 +29,14 @@ var RolesComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Array)
     ], RolesComponent.prototype, "roles", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], RolesComponent.prototype, "newRoles", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], RolesComponent.prototype, "yeap", void 0);
     RolesComponent = __decorate([
         core_1.Component({
             selector: 'role-list',

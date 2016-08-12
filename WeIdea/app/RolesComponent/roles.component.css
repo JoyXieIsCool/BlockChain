@@ -12,7 +12,7 @@
   margin-top: -150px;
   background-color: white;
   box-shadow: 0 0 10px 3px #252424;
-  overflow: hidden;
+  /*overflow: hidden;*/
   padding: 10px;
   transition: all .3s ease-in-out;
 }
@@ -49,4 +49,28 @@ figure > figcaption{
 }
 p{
   text-align: center;
+}
+
+.tips{
+  position         : absolute;
+  right            : -15px;
+  top              : -15px;
+  width            : 30px;
+  height           : 30px;
+  border-radius    : 50%;
+  color            : white;
+  background-color : #F44336;
+  z-index          : 2;
+  text-align       : center;
+  line-height      : 30px;
+  cursor           : pointer;
+}
+
+.qier{
+  position : absolute;
+  right    : -70px;
+  top      : -15px;
+  width    : 64px;
+  height   : 64px;
+  z-index  : 3;
 }

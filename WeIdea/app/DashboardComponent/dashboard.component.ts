@@ -30,6 +30,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
   message      : any = [];
   isSuccess    : Boolean;
   during       : number = 1000;
+  oldRoles     : number = 0;
+  newRoles     : number = 0;
 
   constructor(
     private blockService: BlockService,
@@ -47,12 +49,18 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
   }
 
+  yeap(){
+    this.newRoles = 0;
+    this.oldRoles = this.roles.length;
+  }
+
   updateRoles(){
     let that = this;
     this.roleService.get().subscribe(data => {
-      that.roles = data.nodes;
-      that.mine = data.me;
-    })  
+      that.roles    = data.nodes;
+      that.mine     = data.me;
+      that.newRoles = that.roles.length - that.oldRoles;
+    });
     if(!!this.timer){
       clearTimeout(this.timer);
     }
@@ -66,7 +74,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
     let that = this;
     this.notifyService.get().subscribe({
       next(value){
-        //console.log(value)
         if(!!value["alert"] && value["alert"] == '1'){
           that.needComfirm = true;
           let tmp = value.msg.split('_');

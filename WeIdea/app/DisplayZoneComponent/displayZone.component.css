@@ -1,11 +1,11 @@
 .displayZone-outer{
-  width: 600px;
-  height: auto;
-  padding: 10px;
-  position: relative;
-  text-align: center;
-  /*box-shadow: 0 0 10px 5px #ccc;*/
-  margin: 50px auto;
+  width        : 600px;
+  height       : auto;
+  padding      : 10px;
+  position     : relative;
+  text-align   : center;
+  /*box-shadow : 0 0 10px 5px #ccc;*/
+  margin       : 50px auto;
 }
 
 h2{
@@ -18,9 +18,9 @@ h2 > img{
   transition         : all .5s ease-in-out;
 }
 h2 > span{
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 5px;
+  display        : inline-block;
+  vertical-align : middle;
+  margin         : 0 5px;
 }
 h2 > img:first-child{
   transform: translateX(-20px);
@@ -32,9 +32,9 @@ h2 > img:last-child{
   transform: translateX(0);
 }
 .decorator{
-  position: relative;
-  width: 100%;
-  height: 40px;
+  position : relative;
+  width    : 100%;
+  height   : 40px;
 }
 .decorator .bar{
   position                   : absolute;
@@ -89,14 +89,24 @@ h2 > img:last-child{
   font-size     : 16px;
   text-align    : left;
 }
-
+.transction.selfTransction{
+  background-color: #fefefe;
+  /*color: white;*/
+}
+.transction:nth-child(even){
+  border-color: #464646;
+  margin-bottom: 5px;
+}
 .transction span:nth-child(even){
-  font-size: 18px;
-  font-weight: blod;
-  padding: 6px;
+  font-size   : 18px;
+  font-weight : blod;
+  padding     : 6px;
 }
 .transction span:last-child{
-  margin-left: 50px;
+  margin-left : 16px;
+}
+.transction span.other{
+  margin: 0;
 }
 
 .date{

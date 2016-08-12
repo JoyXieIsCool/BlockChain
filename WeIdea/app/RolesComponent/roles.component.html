@@ -10,9 +10,14 @@
   <div class="body">
     <p>其他节点用户：</p>
     <p *ngFor="let role of roles;let i = index">
-      <span>{{i+1}}</span>:
+      <span>{{i+1}}</span>.
       <span>{{role}}</span>
     </p>    
   </div>
-
+  <div class="tips" *ngIf="newRoles > 0" (click)="clean()">
+  {{newRoles}}
+  </div>
+<!--   <div class="qier">
+    <img src="images/企业吉祥物64.png" alt="" />
+  </div> -->
 </section>

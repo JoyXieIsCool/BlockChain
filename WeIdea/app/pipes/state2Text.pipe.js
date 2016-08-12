@@ -15,7 +15,7 @@ var State2Text = (function () {
     State2Text.prototype.transform = function (value, act) {
         console.log(act);
         var action = act == 1 ? '借' : '还';
-        var map = ['有借有还，再借还难！', '请选择操作！', (action + "\u7ED9\u8C01\uFF1F"), '请输入金额！', '', '操作完毕！'];
+        var map = ['有借有还，再借不难！', '请选择操作！', (action + "\u7ED9\u8C01\uFF1F"), '请输入金额！', '', '操作完毕！'];
         return value >= 0 && value < map.length ? map[value] : "Error!";
     };
     State2Text = __decorate([
