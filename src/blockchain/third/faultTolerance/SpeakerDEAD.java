@@ -2,6 +2,7 @@ package blockchain.third.faultTolerance;
 
 import java.net.InetAddress;
 import java.util.Calendar;
+import java.util.Set;
 
 import blockchain.third.bean.BROADCASTTYPY;
 import blockchain.third.bean.GlobalVariable;
@@ -26,8 +27,12 @@ public class SpeakerDEAD extends Timer {
 		try {
 			if (ping(TimerVar.SpeakerIP)) {
 				// Speaker并不没有死亡！重发数据包
-				System.out.println("Speaker并不没有死亡！重发数据包"+JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
-				MakeConcensus.unicast(TimerVar.SpeakerIP, GlobalVariable.sendBlockPort,
+				System.out
+						.println("Speaker并不没有死亡！重发数据包"
+								+ JsonUtil
+										.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
+				MakeConcensus.unicast(TimerVar.SpeakerIP,
+						GlobalVariable.sendBlockPort,
 						JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
 				restart();
 			} else {
@@ -37,16 +42,19 @@ public class SpeakerDEAD extends Timer {
 				GlobalVariable.ipList.remove(TimerVar.SpeakerID);
 				int sum = GlobalVariable.ipList.size() + 1;
 				int key = minute % sum;
-				String SpeakerID = 'A' + key + "";
-				while (!GlobalVariable.ipList.containsKey(SpeakerID)) {
-					key++;
-					SpeakerID = 'A' + key + "";
-					if (key >= sum)
-						System.out.println("BOOM!");
+				String SpeakerID = "";
+				if (key != 0) {
+					String[] keySet = (String[]) GlobalVariable.ipList.keySet()
+							.toArray();
+					SpeakerID = keySet[key];
+				} else {
+					SpeakerID = GlobalVariable.ID;
 				}
+
 				if (SpeakerID.equals(GlobalVariable.ID)) {
 					// 我是speaker！！
-					System.out.println("Speaker is dead. I am the new Speaker");
+					System.out.println("Speaker is dead." + SpeakerID
+							+ " is the new Speaker");
 					MakeConcensus.broadcast(BROADCASTTYPY.REQUSTBLOCK, "");
 				} else {
 					// 等着Speaker发言！！

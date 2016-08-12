@@ -96,7 +96,14 @@ public class MakeConcensus {
 			msg.sender = GlobalVariable.ID;
 			msg.operation_code = Constants.RESBLOCK;
 			System.out.println(GlobalVariable.ID + "_" + "request a block");
-			requstBlock.Send(msg.toString());
+			if(GlobalVariable.ipList.size()==0){
+				System.out.println("I am Alone.");
+				DB.getDBInstance().addBlock(MakeConcensus.m_tmpBlock);
+				MakeConcensus.block_arr.clear();
+				MakeConcensus.m_tmpBlock.clear();
+			}else{
+				requstBlock.Send(msg.toString());
+			}
 			break;
 
 		case SENDRESPOSE:

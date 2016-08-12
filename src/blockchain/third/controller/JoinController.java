@@ -189,6 +189,7 @@ public class JoinController {
 			}
 			
 			// 发送数据库文件给新加入的节点
+			System.out.println("JC192: "+dbFile.getAbsolutePath());
 			FileCast fc = new FileCast(GlobalVariable.receiveRootFilePort);
 			try {
 				fc.Send(host, GlobalVariable.dbPath);
