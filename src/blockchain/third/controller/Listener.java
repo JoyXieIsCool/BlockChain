@@ -26,26 +26,12 @@ public class Listener extends BroadListener {
 		if (port == GlobalVariable.requestResponsePort) {
 			Message msg = new Message(info);
 			if (GlobalVariable.ID.equals(msg.receiver)) {
+				// 需要本人处理的则等待用户确认后再记录
 				GlobalVariable.alertMessage = info;
+				GlobalVariable.needResponse = true;
 			} else {
+				// 不需要本人处理的请求则添加相应的记录
 				MakeConcensus.msg_map.put(msg.timestamp, msg);
-				Message s_msg = new Message(info);
-
-				s_msg.operation_code = Constants.RESB;
-				s_msg.receiver = msg.sender;
-				s_msg.sender = msg.receiver;
-				s_msg.timestamp = msg.timestamp;
-				// // decide send what response in each time;
-				if (true) {
-					s_msg.value = 1;
-				} else {
-					s_msg.value = 0;
-				}
-				MakeConcensus.m_tmpBlock.addRecord(msg.toString());
-				MakeConcensus.m_tmpBlock.addRecord(s_msg.toString());
-				System.out.println(GlobalVariable.ID + "_" + "get a  request");
-				MakeConcensus.broadcast(BROADCASTTYPY.SENDRESPOSE,
-						s_msg.toString());
 			}
 		}
 
@@ -124,8 +110,7 @@ public class Listener extends BroadListener {
 			DB.getDBInstance().addBlock(block);
 			MakeConcensus.m_tmpBlock.clear();
 			// return;
-		}
-		else if (port == GlobalVariable.receveSpeakerIDPort) {
+		} else if (port == GlobalVariable.receveSpeakerIDPort) {
 			System.out.println(GlobalVariable.ID + "_" + "become a speaker");
 			if (GlobalVariable.ID.equals(info)) {
 				GlobalVariable.isSpeaker = true;
