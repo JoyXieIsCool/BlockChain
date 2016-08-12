@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
     let that = this;
     this.notifyService.get().subscribe({
       next(value){
-        console.log(value)
+        //console.log(value)
         if(!!value["alert"] && value["alert"] == '1'){
           that.needComfirm = true;
           let tmp = value.msg.split('_');

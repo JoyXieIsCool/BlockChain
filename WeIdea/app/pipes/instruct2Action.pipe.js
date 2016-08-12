@@ -14,8 +14,9 @@ var Instruct2Action = (function () {
     }
     Instruct2Action.prototype.transform = function (value) {
         var map = {
-            'REQB': '借出',
-            'RESB': '收到'
+            '1000': '借给',
+            '1001': '收到',
+            '1002': '还给',
         };
         return !!value ? map[value] : '';
     };
