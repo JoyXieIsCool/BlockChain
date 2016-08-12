@@ -26,8 +26,12 @@ public class SpeakerDEAD extends Timer {
 		try {
 			if (ping(TimerVar.SpeakerIP)) {
 				// Speaker并不没有死亡！重发数据包
-				System.out.println("Speaker并不没有死亡！重发数据包"+JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
-				MakeConcensus.unicast(TimerVar.SpeakerIP, GlobalVariable.sendBlockPort,
+				System.out
+						.println("Speaker并不没有死亡！重发数据包"
+								+ JsonUtil
+										.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
+				MakeConcensus.unicast(TimerVar.SpeakerIP,
+						GlobalVariable.sendBlockPort,
 						JsonUtil.transBlock2JsonStr(MakeConcensus.m_tmpBlock));
 				restart();
 			} else {
@@ -40,13 +44,16 @@ public class SpeakerDEAD extends Timer {
 				String SpeakerID = 'A' + key + "";
 				while (!GlobalVariable.ipList.containsKey(SpeakerID)) {
 					key++;
-					SpeakerID = 'A' + key + "";
-					if (key >= sum)
+					SpeakerID =""+(char)('A' + key);
+					if (key >= sum) {
 						System.out.println("BOOM!");
+						break;
+					}
 				}
 				if (SpeakerID.equals(GlobalVariable.ID)) {
 					// 我是speaker！！
-					System.out.println("Speaker is dead. I am the new Speaker");
+					System.out.println("Speaker is dead." + SpeakerID
+							+ " is the new Speaker");
 					MakeConcensus.broadcast(BROADCASTTYPY.REQUSTBLOCK, "");
 				} else {
 					// 等着Speaker发言！！
