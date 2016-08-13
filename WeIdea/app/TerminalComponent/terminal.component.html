@@ -26,7 +26,7 @@
       <button (click) = "selectTarget()" class="btn btn-primary">确定</button>
     </div>
     <div id="terminal" *ngIf="state == 3">
-      <input class="form-control" type="number" min="0" [(ngModel)]="amount"/>
+      <input class="form-control" type="number" min="0" max="64000" [(ngModel)]="amount"/>
       <button (click) = "comfirm()" class="btn btn-success">提交</button>
     </div>
     <div class="sending" *ngIf="state == 4">

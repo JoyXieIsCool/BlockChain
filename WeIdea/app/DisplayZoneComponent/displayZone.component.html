@@ -4,8 +4,8 @@
       <h2><img src="images/arrow-right.png" /><span>区块链信息板</span><img src="images/arrow-left.png" /></h2>
     </header>
     <div class="block" *ngFor="let block of blocks;let i = index">
-      <div class="decorator" [class.latest]=" i < (newGuy-1)">
-        <div class="circle"><span class="glyphicon glyphicon-leaf" [class.glyphicon-fire]="i <= (newGuy-1)"></span></div>
+      <div class="decorator" [class.latest]=" i > (oldGuy-1)">
+        <div class="circle"><span class="glyphicon glyphicon-leaf" [class.glyphicon-fire]="i >= (oldGuy-1)"></span></div>
         <div class="bar" @colorRun></div>
       </div>
       <div class="transctions">
