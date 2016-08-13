@@ -60,7 +60,10 @@ var DisplayZoneComponent = (function () {
                         });
                         counter++;
                         //倒着插入
-                        that.blocks.unshift(cur);
+                        // console.log(cur);
+                        // console.log(counter);
+                        that.blocks.push(cur);
+                        // console.log(that.blocks);           
                     });
                 }
                 console.log(that.blocks);
